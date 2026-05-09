@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+    <title>Trainer List</title>
+    <style>
+        /* ACTION BUTTON STYLE */
+        .action-btn{
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+            background: #fff;
+            transition: 0.25s;
+        }
+
+        /* ICON SIZE */
+        .action-btn i{
+            font-size: 18px;
+        }
+
+        /* HOVER */
+        .action-btn:hover{
+            background: #f3f4f6;
+            transform: translateY(-2px);
+        }
+
+        /* COLORS (optional subtle) */
+        .text-warning{ color: #f59e0b !important; }
+        .text-success{ color: #10b981 !important; }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div th:if="${message}" class="alert alert-success">
+                <i class="ri-checkbox-circle-line"></i>
+                <span th:text="${message}"></span>
+            </div>
+            <div th:if="${error}" class="alert alert-danger">
+                <i class="ri-error-warning-line"></i>
+                <span th:text="${error}"></span>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+
+                <!-- Left -->
+                <div>
+                    <h2 class="fw-bold mb-0">Trainer List</h2>
+                    <small class="text-muted">
+                        Manage all trainer, Active Deactivate,add info,view member list
+                    </small>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+
+                <!-- ================= TRAINER SEARCH ================= -->
+                <div class="trainer-search-bar mb-4">
+
+                    <form method="get" th:action="@{/admin/trainers}">
+                        <div class="row align-items-center g-2">
+
+                            <!-- 🔍 Search (name/email/phone) -->
+                            <div class="col-md-6">
+                                <input type="text"
+                                       name="keyword"
+                                       class="form-control"
+                                       placeholder="Search by name, email, phone..."
+                                       th:value="${keyword}">
+                            </div>
+
+                            <!-- 📌 Active / Deactive -->
+                            <div class="col-md-4">
+                                <select name="active" class="form-select">
+
+                                    <option value="">All Status</option>
+
+                                    <option value="true"
+                                            th:selected="${active == true}">
+                                        Active
+                                    </option>
+
+                                    <option value="false"
+                                            th:selected="${active == false}">
+                                        Deactive
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <!-- 🔎 Button -->
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    Search
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Experience</th>
+                        <th>Salary</th>
+                        <th>Status</th>
+                        <th>Total Members</th>
+                        <th>Members</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="trainer, stat : ${trainers}">
+                        <td th:text="${stat.count}"></td>
+                        <td th:text="${trainer.user.lastName}"></td>
+                        <td th:text="${trainer.user.email}"></td>
+                        <td th:text="${trainer.experienceYears + ' yrs'}"></td>
+                        <td th:text="${trainer.salary}"></td>
+
+                        <td>
+                            <span th:if="${trainer.active}" class="badge bg-success">Active</span>
+                            <span th:unless="${trainer.active}" class="badge bg-danger">Inactive</span>
+                        </td>
+                        <td th:text="${trainer.memberCount}"></td>
+                        <td>
+                            <a th:href="@{/admin/trainers/{id}/members(id=${trainer.trainerId})}"
+                               class="btn btn-sm btn-primary">
+                                View Members
+                            </a>
+                        </td>
+
+                        <td class="text-nowrap">
+
+                            <!-- Edit -->
+                            <a th:href="@{/admin/trainers/edit/{id}(id=${trainer.trainerId})}"
+                               class="btn btn-sm btn-light action-btn"
+                               title="Edit">
+                                <i class="ri-pencil-line"></i>
+                            </a>
+
+                            <!-- Activate / Deactivate -->
+                            <form th:action="@{/admin/trainers/toggle/{id}(id=${trainer.trainerId})}"
+                                  method="post"
+                                  class="d-inline">
+
+                                <input type="hidden" th:csrf />
+
+                                <button type="submit"
+                                        class="btn btn-sm action-btn"
+                                        th:classappend="${trainer.active} ? 'btn-light text-warning' : 'btn-light text-success'"
+                                        th:title="${trainer.active ? 'Deactivate' : 'Activate'}">
+
+                                    <i th:class="${trainer.active} ? 'ri-pause-circle-line' : 'ri-play-circle-line'"></i>
+
+                                </button>
+                            </form>
+
+                            <!-- View Members -->
+                            <a th:href="@{/admin/trainers/{id}/members(id=${trainer.trainerId})}"
+                               class="btn btn-sm btn-light action-btn"
+                               title="Members">
+                                <i class="ri-group-line"></i>
+                            </a>
+
+                            <!-- View Details -->
+                            <a th:href="@{'/admin/trainers/' + ${trainer.trainerId}}"
+                               class="btn btn-sm btn-light action-btn"
+                               title="View">
+                                <i class="ri-eye-line"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                    <tr th:if="${trainers.size() == 0}">
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="ri-user-search-line fs-2"></i>
+                            <div>No trainer found</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--                pagination section-->
+                <div th:if="${totalPages > 1}">
+                    <div th:replace="fragments/pagination :: pagination('/admin/trainers', ${currentPage}, ${totalPages})"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/trainer-toggle.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

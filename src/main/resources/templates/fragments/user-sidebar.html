@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<body>
+
+<!-- Member Sidebar -->
+<aside th:fragment="userSidebar" class="sidebar">
+    <h2>Gym Member</h2>
+
+    <ul>
+        <li><a th:href="@{/profile}"><i class="ri-user-settings-line"></i><span>Profile</span></a></li>
+    </ul>
+</aside>
+
+</body>
+</html>

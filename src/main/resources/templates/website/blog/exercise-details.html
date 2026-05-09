@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+    <title th:text="${exercise.name}">Blog Details</title>
+
+    <style>
+        /* MAIN IMAGE */
+        .main-img-wrapper{
+            overflow:hidden;
+            border-radius:12px;
+        }
+
+        .main-img{
+            width:100%;
+            height:400px;
+            object-fit:cover;
+            transition:0.6s;
+        }
+
+        .main-img-wrapper:hover .main-img{
+            transform:scale(1.05);
+        }
+
+        /* THUMBNAIL */
+        .thumb-wrapper{
+            overflow:hidden;
+            border-radius:8px;
+        }
+
+        .thumb-wrapper img{
+            width:100%;
+            height:120px;
+            object-fit:cover;
+            transition:0.4s;
+        }
+
+        .thumb-wrapper:hover img{
+            transform:scale(1.1);
+        }
+
+        /* META */
+        .meta{
+            display:flex;
+            gap:20px;
+            font-size:14px;
+            color:#777;
+        }
+
+        .meta span{
+            display:flex;
+            align-items:center;
+            gap:5px;
+        }
+
+        /* SECTION TITLE */
+        .section-title{
+            font-weight:600;
+            margin-bottom:6px;
+        }
+
+        /* WARNING BOX */
+        .warning-box{
+            display:flex;
+            gap:12px;
+            background:#fff3f3;
+            border-left:4px solid #dc3545;
+            padding:15px;
+            border-radius:8px;
+        }
+
+        .warning-box i{
+            color:#dc3545;
+            font-size:22px;
+        }
+
+        /* VIDEO */
+        iframe{
+            border-radius:10px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:768px){
+
+            .main-img{
+                height:250px;
+            }
+
+            .thumb-wrapper img{
+                height:90px;
+            }
+
+        }
+
+
+        /* CARD */
+        .video-card{
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        /* WRAPPER */
+        .video-wrapper{
+            position:relative;
+            cursor:pointer;
+            overflow:hidden;
+        }
+
+        /* THUMB */
+        .video-thumb{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+            transition:0.4s;
+        }
+
+        /* ZOOM */
+        .video-wrapper:hover .video-thumb{
+            transform:scale(1.08);
+        }
+
+        /* PLAY BUTTON */
+        .play-btn{
+            position:absolute;
+            inset:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:40px;
+            color:#fff;
+            background:rgba(0,0,0,0.3);
+            opacity:0;
+            transition:0.3s;
+        }
+
+        .video-wrapper:hover .play-btn{
+            opacity:1;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:768px){
+            .video-thumb{
+                height:180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Exercise Details',
+        'Read our latest insights and updates.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<div class="container py-5">
+
+    <div class="row g-4">
+
+        <!-- LEFT SIDE -->
+        <div class="col-lg-7">
+
+            <!-- MAIN IMAGE -->
+            <div class="main-img-wrapper mb-3">
+                <img th:if="${exercise.images.size() > 0}"
+                     th:src="@{'/uploads/exercises/' + ${exercise.images[0].imageUrl}}"
+                     class="main-img">
+            </div>
+
+            <!-- THUMBNAIL IMAGES -->
+            <div class="row g-2">
+
+                <div class="col-6 col-md-4"
+                     th:each="img, stat : ${exercise.images}"
+                     th:if="${stat.index > 0}">
+
+                    <div class="thumb-wrapper">
+                        <img th:src="@{'/uploads/exercises/' + ${img.imageUrl}}">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- VIDEO -->
+            <div class="row g-3 mt-4" th:if="${exercise.videos != null}">
+
+                <div class="col-lg-6 col-md-6"
+                     th:each="v : ${exercise.videos}">
+
+                    <div class="video-card">
+
+                        <!-- THUMBNAIL -->
+                        <div class="video-wrapper"
+                             th:attr="data-url=${v.videoUrl}">
+
+                            <img class="video-thumb"
+                                 th:src="'https://img.youtube.com/vi/' +
+                     ${#strings.contains(v.videoUrl,'youtu.be/')
+                        ? #strings.substringBefore(#strings.substringAfter(v.videoUrl,'youtu.be/'),'?')
+                        : #strings.substringBefore(#strings.substringAfter(v.videoUrl,'v='),'&')}
+                     + '/hqdefault.jpg'">
+
+                            <!-- PLAY ICON -->
+                            <div class="play-btn">
+                                <i class="ri-play-fill"></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-lg-5">
+
+            <h2 class="fw-bold mb-2"
+                th:text="${exercise.name}">
+            </h2>
+
+            <!-- META -->
+            <div class="meta mb-3">
+
+                <span>
+                    <i class="ri-user-line"></i>
+                    <span th:text="${exercise.createdBy != null ? exercise.createdBy.email : 'Admin'}"></span>
+                </span>
+
+                <span>
+                    <i class="ri-calendar-line"></i>
+                    <span th:text="${#temporals.format(exercise.createdAt,'dd MMM yyyy')}"></span>
+                </span>
+
+            </div>
+
+            <!-- BADGES -->
+            <div class="mb-3">
+
+                <span class="badge bg-dark me-2"
+                      th:text="${exercise.targetMuscle}">
+                </span>
+
+                <span class="badge bg-warning text-dark"
+                      th:text="${exercise.difficulty}">
+                </span>
+
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-4">
+                <h6 class="section-title">Description</h6>
+                <p class="text-muted"
+                   th:text="${exercise.description}">
+                </p>
+            </div>
+
+            <!-- WARNING -->
+            <div class="warning-box"
+                 th:if="${exercise.warning != null}">
+
+                <i class="ri-error-warning-line"></i>
+
+                <div>
+                    <strong>Warning</strong>
+                    <p th:text="${exercise.warning}"></p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+
+        document.querySelectorAll(".video-wrapper").forEach(function(el){
+
+            let url = el.getAttribute("data-url");
+
+            // extract video id
+            function getId(url){
+                if(url.includes("youtu.be/")){
+                    return url.split("youtu.be/")[1].split("?")[0];
+                } else {
+                    return url.split("v=")[1].split("&")[0];
+                }
+            }
+
+            let videoId = getId(url);
+
+            el.addEventListener("mouseenter", function(){
+
+                el.innerHTML = `
+                <iframe
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                    style="width:100%; height:220px;">
+                </iframe>
+            `;
+            });
+
+            el.addEventListener("mouseleave", function(){
+
+                el.innerHTML = `
+                <img class="video-thumb"
+                     src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg">
+                <div class="play-btn">
+                    <i class="ri-play-fill"></i>
+                </div>
+            `;
+            });
+
+        });
+
+    });
+</script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

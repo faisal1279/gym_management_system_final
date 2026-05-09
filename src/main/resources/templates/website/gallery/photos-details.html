@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Photos</title>
+    <style>
+        .gallery-details{
+            background:#f9fafb;
+        }
+
+        /* BACK BUTTON */
+        .back-btn{
+            text-decoration:none;
+            color:#111;
+            border:1px solid #ddd;
+            padding:8px 14px;
+            border-radius:6px;
+            transition:0.3s;
+        }
+
+        .back-btn:hover{
+            background:#111;
+            color:#fff;
+        }
+
+        /* IMAGE */
+        .image-box{
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-box img{
+            width:100%;
+            height:420px;
+            object-fit:cover;
+            transition:0.4s;
+        }
+
+        /*  hover zoom */
+        .image-box:hover img{
+            transform:scale(1.05);
+        }
+
+        /* CONTENT */
+        .content-box{
+            background:#fff;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* META */
+        .meta{
+            display:flex;
+            gap:15px;
+            align-items:center;
+        }
+
+        .date{
+            font-size:14px;
+            color:#777;
+        }
+
+        /* TITLE */
+        .title{
+            font-weight:800;
+            font-size:28px;
+            margin-bottom:10px;
+        }
+
+        /* DESCRIPTION */
+        .desc{
+            font-size:16px;
+            line-height:1.8;
+            color:#555;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:768px){
+
+            .image-box img{
+                height:260px;
+            }
+
+            .title{
+                font-size:22px;
+            }
+
+            .content-box{
+                padding:20px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Photos',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="gallery-details py-5">
+
+    <div class="container">
+
+        <!-- 🔙 Back -->
+        <a href="/gallery/photos" class="back-btn mb-4 d-inline-block">
+            ← Back to Gallery
+        </a>
+
+        <div class="row g-5 align-items-center">
+
+            <!-- 🔥 IMAGE -->
+            <div class="col-lg-7">
+
+                <div class="image-box">
+
+                    <img th:src="@{'/uploads/gallery/' + ${img.imageUrl}}">
+
+                </div>
+
+            </div>
+
+            <!-- 🔥 CONTENT -->
+            <div class="col-lg-5">
+
+                <div class="content-box">
+
+                    <!-- Category + Date -->
+                    <div class="meta mb-3">
+
+<span class="badge bg-dark"
+      th:text="${img.category}">
+</span>
+
+                        <span class="date"
+                              th:text="${#temporals.format(img.createdAt,'dd MMM yyyy')}">
+</span>
+
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="title"
+                        th:text="${img.title}">
+                    </h2>
+
+                    <hr>
+
+                    <!-- Description -->
+                    <p class="desc"
+                       th:text="${img.description}">
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

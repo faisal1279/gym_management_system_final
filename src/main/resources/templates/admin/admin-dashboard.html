@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="container-fluid py-4">
+
+            <!-- Page Title -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold">Admin Dashboard</h2>
+                <span class="text-muted">Overview & Analytics</span>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row g-4 mb-4">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card stat-card bg-primary text-white text-center p-3 h-100">
+                        <div class="card-body">
+                            <h6 class="opacity-75">Total Users</h6>
+                            <h3 class="fw-bold" th:text="${stats.totalUsers}"></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card stat-card bg-success text-white text-center p-3 h-100">
+                        <div class="card-body">
+                            <h6 class="opacity-75">Total Members</h6>
+                            <h3 class="fw-bold" th:text="${stats.totalMembers}"></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card stat-card bg-warning text-white text-center p-3 h-100">
+                        <div class="card-body">
+                            <h6 class="opacity-75">Today Attendance</h6>
+                            <h3 class="fw-bold" th:text="${stats.todayAttendance}"></h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card stat-card bg-danger text-white text-center p-3 h-100">
+                        <div class="card-body">
+                            <h6 class="opacity-75">Monthly Revenue</h6>
+                            <h3 class="fw-bold">৳ <span th:text="${stats.monthlyRevenue}"></span></h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Charts Section -->
+            <div class="row g-4">
+
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
+                        <div class="card-body">
+                            <h5 class="fw-semibold mb-3">Revenue (Last 6 Months)</h5>
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0 rounded-4 h-100">
+                        <div class="card-body">
+                            <h5 class="fw-semibold mb-3">Payment Method Distribution</h5>
+                            <canvas id="paymentMethodChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+<!--                <div class="col-12">-->
+<!--                    <div class="card shadow-sm border-0 rounded-4">-->
+<!--                        <div class="card-body">-->
+<!--                            <h5 class="fw-semibold mb-3">Attendance (Last 7 Days)</h5>-->
+<!--                            <canvas id="attendanceChart"></canvas>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+
+    const revenueData = [[${stats.revenueChart.values()}]];
+    const revenueLabels = [[${stats.revenueChart.keySet()}]];
+
+    new Chart(document.getElementById('revenueChart'), {
+        type: 'line',
+        data: {
+            labels: revenueLabels,
+            datasets: [{
+                label: 'Revenue',
+                data: revenueData,
+                borderWidth: 2,
+                fill: false
+            }]
+        }
+    });
+
+
+
+    //for payment
+    const methodLabels = [[${stats.paymentMethodChart.keySet()}]];
+    const methodData = [[${stats.paymentMethodChart.values()}]];
+
+    new Chart(document.getElementById('paymentMethodChart'), {
+        type: 'pie',
+        data: {
+            labels: methodLabels,
+            datasets: [{
+                data: methodData
+            }]
+        }
+    });
+
+</script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

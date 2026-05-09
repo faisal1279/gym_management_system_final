@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<body>
+
+<!-- Member Sidebar -->
+<aside th:fragment="memberSidebar" class="sidebar">
+    <h2>Gym Member</h2>
+
+    <ul>
+        <li><a th:href="@{/member/dashboard}"><i class="ri-dashboard-line"></i><span>Dashboard</span></a></li>
+
+        <li><a th:href="@{/member/attendance}"><i class="ri-calendar-check-line"></i><span>My Attendance</span></a></li>
+
+        <li><a th:href="@{/member/trainer}"><i class="ri-user-star-line"></i><span>My Trainer</span></a></li>
+
+        <li><a th:href="@{/member/routine}"><i class="ri-user-star-line"></i><span>My Routine</span></a></li>
+
+        <li><a th:href="@{/member/membership}"><i class="ri-id-card-line"></i><span>Membership</span></a></li>
+
+        <li><a th:href="@{/member/payments}"><i class="ri-wallet-line"></i><span>Payments</span></a></li>
+
+        <li><a th:href="@{/profile}"><i class="ri-user-settings-line"></i><span>Profile</span></a></li>
+    </ul>
+</aside>
+
+</body>
+</html>

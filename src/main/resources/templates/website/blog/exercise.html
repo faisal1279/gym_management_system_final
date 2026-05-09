@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+    <title>Blogs</title>
+
+    <style>
+        /* CARD */
+        .exercise-card{
+            background:#fff;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 8px 25px rgba(0,0,0,0.05);
+            transition:0.3s;
+            height:100%;
+        }
+
+        /*.exercise-card:hover{*/
+        /*    transform: translateY(-6px);*/
+        /*    box-shadow:0 12px 35px rgba(0,0,0,0.1);*/
+        /*}*/
+
+        /* IMAGE WRAPPER */
+        .img-wrapper{
+            position:relative;
+            overflow:hidden;
+            display:block;
+        }
+
+        /* IMAGE */
+        .img-wrapper img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+            transition: transform 0.6s ease;
+        }
+
+        /* 🔥 ZOOM EFFECT */
+        .img-wrapper:hover img{
+            transform: scale(1.12);
+        }
+
+        /* OVERLAY */
+        .img-overlay{
+            position:absolute;
+            inset:0;
+            background:rgba(0,0,0,0.4);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            opacity:0;
+            transition:0.3s;
+        }
+
+        .img-overlay i{
+            color:#fff;
+            font-size:28px;
+        }
+
+        /* SHOW OVERLAY */
+        .img-wrapper:hover .img-overlay{
+            opacity:1;
+        }
+
+        /* BODY */
+        .card-body-custom{
+            padding:18px;
+        }
+
+        /* TITLE */
+        .card-title{
+            font-size:18px;
+            font-weight:600;
+            margin-bottom:10px;
+            transition:0.3s;
+        }
+
+        /*!* TITLE HOVER *!*/
+        /*.exercise-card:hover .card-title{*/
+        /*    color: var(--teal);*/
+        /*}*/
+
+        /* META */
+        .card-meta{
+            display:flex;
+            justify-content:space-between;
+            font-size:13px;
+            color:#777;
+        }
+
+        .card-meta span{
+            display:flex;
+            align-items:center;
+            gap:5px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:576px){
+            .img-wrapper img{
+                height:180px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Exercise',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<!--blogs-->
+<section class="blog-section py-5">
+
+    <div class="container">
+        <!-- ================= Exercise SEARCH ================= -->
+        <div class=" mb-4">
+
+            <form method="get" th:action="@{/blogs}">
+                <div class="row align-items-center g-2">
+
+                    <!-- 🔍 Search -->
+                    <div class="col-md-7">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control search-input"
+                               placeholder="Search blogs..."
+                               th:value="${keyword}">
+                    </div>
+
+                    <!-- 📂 Dynamic Category -->
+                    <div class="col-md-3">
+                        <select name="category" class="form-select search-select">
+                            <option value="">All Categories</option>
+
+                            <option th:each="cat : ${categories}"
+                                    th:value="${cat}"
+                                    th:text="${cat}"
+                                    th:selected="${cat == category}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- 🔎 Button -->
+                    <div class="col-md-2">
+                        <button type="submit" class="btn-in w-100">
+                            <i class="ri-search-line me-1"></i> Search
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+        <!-- ================= Exercise ================= -->
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6" th:each="ex : ${exercises}">
+
+                <div class="exercise-card">
+
+                    <!-- IMAGE -->
+                    <a th:href="@{'/blog/exercises/' + ${ex.exerciseId}}" class="img-wrapper">
+
+                        <img th:if="${ex.images.size() > 0}"
+                             th:src="@{'/uploads/exercises/' + ${ex.images[0].imageUrl}}"
+                             alt="exercise">
+
+                        <!-- overlay -->
+                        <div class="img-overlay">
+                            <i class="ri-eye-line"></i>
+                        </div>
+
+                    </a>
+
+                    <!-- BODY -->
+                    <div class="card-body-custom">
+
+                        <!-- TITLE -->
+                        <h5 class="card-title"
+                            th:text="${ex.name}">
+                        </h5>
+
+                        <!-- META -->
+                        <div class="card-meta">
+
+                        <span>
+                            <i class="ri-user-3-line"></i>
+                            <span th:text="${ex.createdBy != null ? ex.createdBy.email : 'Admin'}"></span>
+                        </span>
+
+                            <span>
+                            <i class="ri-calendar-line"></i>
+                            <span th:text="${#temporals.format(ex.createdAt, 'dd MMM yyyy')}"></span>
+                        </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= NO BLOG FOUND CARD ================= -->
+        <div th:if="${exercises.size() == 0}" class="d-flex justify-content-center py-5">
+
+            <div class="card shadow-sm text-center p-4" style="max-width: 400px; width: 100%;">
+
+                <!-- Icon -->
+                <div class="mb-3">
+                    <i class="ri-article-line" style="font-size: 50px; color: #ccc;"></i>
+                </div>
+
+                <!-- Message -->
+                <h5 class="text-muted">No Blogs Found</h5>
+                <p class="text-muted small mb-3">
+                    Sorry, we couldn’t find any blogs matching your search.
+                </p>
+
+                <!-- Optional button -->
+                <a th:href="@{/blogs}" class="btn btn-primary btn-sm">
+                    Clear Filters
+                </a>
+
+            </div>
+
+        </div>
+
+        <!--                pagination section-->
+        <div th:if="${totalPages > 1}">
+            <div th:replace="~{fragments/pagination :: pagination('/blog/exercises', ${currentPage}, ${totalPages})}"></div>
+        </div>
+
+    </div>
+
+</section>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

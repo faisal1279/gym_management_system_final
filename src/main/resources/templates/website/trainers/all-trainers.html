@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Contact</title>
+    <style>
+        .trainer-card {
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+            transition: 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trainer-img img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Info Section */
+        .trainer-info {
+            padding: 25px 20px;
+            background: #f8f9fa;
+            position: relative;
+            transition: 0.4s ease;
+            flex-grow: 1;
+        }
+
+        .trainer-info h5 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .trainer-info p {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        /* Social Icons */
+        .social-icons i {
+            background: #e9ecef;
+            padding: 8px;
+            margin: 0 4px;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .social-icons i:hover {
+            background-color: var(--teal_hover);
+        }
+
+        /* View Profile (Hidden Initially) */
+        .view-profile {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color:var(--teal_hover);
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: 0.4s ease;
+        }
+
+        /*  Hover Effect */
+        .trainer-card:hover .trainer-info {
+            transform: translateY(-25px);
+        }
+
+        .trainer-card:hover .view-profile {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+
+        #btn {
+            display: inline-block;
+            padding: 12px 35px;
+            color: var(--teal);
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            border: 2px solid var( --teal);
+            transition: 0.7s;
+        }
+        #btn:hover{
+            color: var(--text_light);
+            background: var(--teal_hover);
+            border: 2px solid var(--teal_hover);
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Our Trainers',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="trainer-section py-5 bg-light">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" th:each="trainer : ${trainers}">
+                <div class="trainer-card">
+                    <div class="trainer-img">
+                        <a th:href="@{'/trainers/' + ${trainer.trainerId}}">
+                            <img th:src="${trainer.user.profileImage != null}
+                      ? '/uploads/profile/' + ${trainer.user.profileImage}
+                      : '/images/default.webp'"
+                                 alt="Trainer">
+                        </a>
+                    </div>
+                    <div class="trainer-info text-center">
+                        <h5 th:text="${trainer.user.firstName + ' ' + trainer.user.lastName}"></h5>
+                        <p th:text="${trainer.specialization}"></p>
+                        <a th:href="@{'/trainers/' + ${trainer.trainerId}}" class="view-profile">VIEW PROFILE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+
+
+    <title>Members List by trainer</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                        <h4 class="mb-0">
+                            Trainer:
+                            <span th:text="${trainer.user.lastName}"
+                                  class="text-primary"></span>
+                        </h4>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+
+                                <th class="d-none d-md-table-cell">Email</th>
+
+                                <th>Membership</th>
+
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="m : ${members}">
+                                <td th:text="${m.user.lastName}"></td>
+
+                                <td class="d-none d-md-table-cell"
+                                    th:text="${m.user.email}"></td>
+
+                                <td th:text="${m.membership.name}"></td>
+
+                                <td>
+                        <span th:if="${m.active}"
+                              class="badge bg-success">Active</span>
+                                    <span th:if="${!m.active}"
+                                          class="badge bg-secondary">Inactive</span>
+                                </td>
+                            </tr>
+
+                            <!-- Empty State -->
+                            <tr th:if="${members.size() == 0}">
+                                <td colspan="4" class="text-center text-muted py-4">
+                                    No members assigned to this trainer
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--                pagination section-->
+                        <div th:if="${totalPages > 1}">
+                            <div th:replace="fragments/pagination :: pagination(
+    '/admin/trainers/' + ${trainerId} + '/members',
+    ${currentPage},
+    ${totalPages}
+)"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+
+    <title>Update Blog</title>
+
+    <style>
+        .form-control{
+            border:1px solid #ccc;
+            border-radius:0;
+            padding:12px;
+        }
+        .form-control:focus{
+            border:1px solid #000;
+            box-shadow:none;
+            outline:none;
+        }
+        .create-btn{
+            width:100%;
+            background:#222;
+            color:#fff;
+            padding:12px;
+            font-weight:600;
+            letter-spacing:2px;
+            border:none;
+            transition: 0.3s;
+        }
+        .create-btn:hover{
+            background:var(--teal);
+            color:#fff;
+        }
+        .img-preview{
+            max-width: 150px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script src="https://cdn.tiny.cloud/1/wmnaz0d9gj0hhs8ipfa8x8xna7jw7y3h3pbfe322qqexjf28/tinymce/6/tinymce.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            tinymce.init({
+                selector: '#editor',
+                height: 400,
+                menubar: false,
+                plugins: 'link image lists code',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | code'
+            });
+        });
+
+        function previewCover(event) {
+            const img = document.getElementById("coverPreview");
+            img.src = URL.createObjectURL(event.target.files[0]);
+            img.style.display = "block";
+        }
+
+        function previewImages(event) {
+            const container = document.getElementById("imagePreview");
+            container.innerHTML = "";
+            for (let file of event.target.files) {
+                let img = document.createElement("img");
+                img.src = URL.createObjectURL(file);
+                img.className = "img-preview me-2 mb-2";
+                container.appendChild(img);
+            }
+        }
+    </script>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div class="container py-5">
+
+                <h2 class="mb-4">Update Blog</h2>
+
+                <form th:action="@{/admin/blog/update/{id}(id=${blog.id})}"
+                      method="post"
+                      enctype="multipart/form-data">
+
+                    <!-- Title -->
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text"
+                               name="title"
+                               class="form-control"
+                               th:value="${blog.title}"
+                               required>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <input type="text"
+                               name="category"
+                               class="form-control"
+                               th:value="${blog.category}">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <textarea id="editor"
+                                  name="content"
+                                  class="form-control"
+                                  th:text="${blog.content}"></textarea>
+                    </div>
+
+                    <!-- Cover Image -->
+                    <div class="mb-3">
+                        <label class="form-label">Cover Image</label>
+                        <input type="file" name="coverImage" class="form-control" onchange="previewCover(event)">
+                        <img id="coverPreview"
+                             th:if="${blog.coverImage != null}"
+                             th:src="@{'/uploads/blog/' + ${blog.coverImage}}"
+                             class="img-preview"
+                             style="display:block;">
+                    </div>
+
+                    <!-- Existing Images -->
+                    <div class="mb-3">
+                        <label class="form-label">Existing Images</label>
+                        <div class="row">
+                            <div class="col-md-3 mb-3" th:each="img : ${blog.images}">
+                                <img th:src="@{'/uploads/blog/' + ${img.imageUrl}}" class="img-fluid rounded mb-2">
+                                <a th:href="@{/admin/blog/image/delete/{id}(id=${img.id})}"
+                                   class="btn btn-sm btn-danger w-100">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add New Images -->
+                    <div class="mb-3">
+                        <label class="form-label">Add More Images</label>
+                        <input type="file" name="images" multiple class="form-control" onchange="previewImages(event)">
+                        <div id="imagePreview" class="d-flex flex-wrap mt-2"></div>
+                    </div>
+
+                    <!-- Publish Toggle -->
+                    <div class="form-check mb-3">
+                        <input type="checkbox"
+                               name="published"
+                               class="form-check-input"
+                               id="publishCheck"
+                               th:checked="${blog.published}">
+                        <label class="form-check-label">Publish Now</label>
+                    </div>
+
+                    <!-- Submit -->
+                    <button class="btn btn-success create-btn">Update Blog</button>
+
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

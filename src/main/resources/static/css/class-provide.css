@@ -1,0 +1,522 @@
+/*================================ About feature section ========================================*/
+.about-hero {
+    background: #f5f5f5;
+}
+
+.small-title {
+    color: var(--teal_hover);
+
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.main-title {
+    font-weight: 800;
+    font-size: 42px;
+}
+
+.main-title span {
+    color: var(--teal_hover);
+}
+
+.hero-text {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.feature-list p {
+    font-size: 14px;
+}
+
+.feature-list i {
+    color: var(--teal_hover);
+    margin-right: 8px;
+}
+
+.btn-start {
+    background: var(--teal_hover);
+    padding: 12px 28px;
+    border-radius: 30px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.intro-video {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+/* IMAGE ANIMATION START STATE */
+/*.hero-img{*/
+/*    opacity: 0;*/
+/*    transform: translateX(80px);*/
+/*    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);*/
+/*}*/
+
+
+/*.hero-img.show{*/
+/*    opacity: 1;*/
+/*    transform: translateX(0);*/
+/*}*/
+.play-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--teal_hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-left: 4px;
+}
+/*===================Gym feature section============================*/
+.gym-feature-section {
+    overflow: hidden;
+}
+
+/* LEFT DARK AREA */
+.gym-dark-area {
+    color: #fff;
+    padding: 80px 100px;
+}
+
+/* Remove default row margin */
+.feature-inner {
+    margin: 0;
+}
+
+/* FEATURE BOX */
+.gym-feature-box {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.gym-feature-box h4 {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.gym-feature-box p {
+    color: #cfcfcf;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ICON STYLE (exact bold white look) */
+.gym-icon i {
+    font-size: 42px;
+    color: #e6e6e6;
+}
+
+/* RIGHT IMAGE */
+.gym-discount-area {
+    position: relative;
+}
+
+.discount-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.discount-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* OVERLAY */
+.discount-content {
+    position: absolute;
+    bottom: 50px;
+    right: 40px;
+    text-align: right;
+    color: #fff;
+}
+
+.discount-content h1 {
+    font-size: 75px;
+    font-weight: 900;
+}
+
+.discount-content h5 {
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+/* Mobile Fix */
+@media(max-width: 991px) {
+    .gym-dark-area {
+        padding: 60px 30px;
+    }
+
+    .discount-wrapper img {
+        height: 400px;
+    }
+}
+
+.gym-feature-section {
+    padding: 80px 0;
+}
+
+.gym-dark-area {
+    background: #111;
+    color: #fff;
+    padding: 60px;
+}
+
+.gym-feature-box {
+    display: flex;
+    gap: 20px;
+}
+
+.gym-icon i {
+    font-size: 40px;
+}
+
+.gym-discount-area img {
+    width: 100%;
+    height: auto;
+}
+
+/*============================== Class provide section ==========================================*/
+.classes-section {
+    background: #f8f9fa;
+}
+.class-card {
+    background: #fff;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.class-card img {
+    height: 320px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* Image Zoom Effect */
+.class-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Vertical Text Style */
+.vertical-text {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    font-weight: 700;
+    font-size: 14px;
+    background: #ffffffd9;
+    padding: 10px 6px;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+}
+
+/* Text Color Change on Hover */
+.class-card:hover .vertical-text {
+    background: var(--teal_hover);
+    color: #000;
+}
+
+/* Duration Bar */
+.duration {
+    text-align: center;
+    background: #eee;
+    padding: 10px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+/* Duration Color Change */
+.class-card:hover .duration {
+    background: #111;
+    color: #fff;
+}
+
+/*=============================Price plan =========================*/
+.membership-section {
+    padding: 100px 0;
+    background: #f5f5f5;
+}
+
+/* Title */
+.membership-title {
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.membership-title span {
+    color: var(--teal_hover);
+}
+
+.membership-subtitle {
+    max-width: 600px;
+    margin: 15px auto 0;
+    color: #666;
+    font-size: 15px;
+}
+
+/* Card */
+.membership-card {
+    background: #fff;
+    padding: 40px 30px;
+    text-align: left;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+    height: 100%;
+}
+
+.membership-card:hover {
+    transform: translateY(-8px);
+}
+
+.membership-img {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.membership-img img {
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.membership-img h6 {
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+/* Price */
+.price {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 10px 0 0;
+}
+
+.per-month {
+    color: #888;
+    margin-bottom: 25px;
+}
+
+/* List */
+.membership-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.membership-card ul li {
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px;
+}
+
+.membership-card ul li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--teal_hover);
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 7px;
+}
+
+/* Button */
+.btn-join {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--teal_hover);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.btn-join:hover {
+    background: var(--teal_hover);
+}
+
+.price-btn:hover {
+    background-color: #00C6A7;
+    color: #ffffff;
+}
+/* Responsive */
+@media(max-width: 991px) {
+    .membership-title {
+        font-size: 32px;
+    }
+}
+/*==================================trainer profile in home page===================================*/
+.trainer-card {
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+    transition: 0.4s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.trainer-img img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Info Section */
+.trainer-info {
+    padding: 25px 20px;
+    background: #f8f9fa;
+    position: relative;
+    transition: 0.4s ease;
+    flex-grow: 1;
+}
+
+.trainer-info h5 {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.trainer-info p {
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+/* Social Icons */
+.social-icons i {
+    background: #e9ecef;
+    padding: 8px;
+    margin: 0 4px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.social-icons i:hover {
+    background-color: var(--teal_hover);
+}
+
+/* View Profile (Hidden Initially) */
+.view-profile {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color:var(--teal_hover);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 0.4s ease;
+}
+
+/*  Hover Effect */
+.trainer-card:hover .trainer-info {
+    transform: translateY(-25px);
+}
+
+.trainer-card:hover .view-profile {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+#btn {
+    display: inline-block;
+    padding: 12px 35px;
+    color: var(--teal);
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid var( --teal);
+    transition: 0.7s;
+}
+#btn:hover{
+    color: var(--text_light);
+    background: var(--teal_hover);
+    border: 2px solid var(--teal_hover);
+}
+
+/*====================latest blog======================*/
+.blog-section{
+    background:#f5f5f5;
+}
+
+.blog-card{
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+    transition:0.3s;
+}
+
+/*.blog-card:hover{*/
+/*    transform:translateY(-6px);*/
+/*    box-shadow:0 12px 25px rgba(0,0,0,0.1);*/
+/*}*/
+
+/* Image wrapper for zoom */
+.blog-img-wrapper{
+    overflow:hidden;
+}
+
+/* Image zoom effect */
+.blog-img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:transform 0.5s ease;
+}
+
+.blog-card:hover .blog-img{
+    transform:scale(1.1);
+}
+
+.blog-content{
+    padding:20px;
+}
+
+.blog-meta{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.blog-tag{
+    color:var(--teal);
+    font-weight:600;
+}
+
+.blog-date{
+    color:#777;
+}
+
+/* Title style */
+.blog-title{
+    font-weight:700;
+    margin-bottom:10px;
+    transition:color 0.3s;
+    cursor:pointer;
+}
+
+/* Title hover color */
+.blog-title:hover{
+    color:var(--teal_hover);
+}
+
+.blog-text{
+    color:#777;
+    font-size:14px;
+}

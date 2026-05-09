@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+    <title>Blogs</title>
+
+    <style>
+        .blog-section{
+            background:#f5f5f5;
+        }
+
+        .blog-card{
+            background:#fff;
+            border-radius:6px;
+            overflow:hidden;
+            box-shadow:0 4px 10px rgba(0,0,0,0.05);
+            transition:0.3s;
+        }
+
+        .blog-card:hover{
+            transform:translateY(-6px);
+            box-shadow:0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Image wrapper for zoom */
+        .blog-img-wrapper{
+            overflow:hidden;
+        }
+
+        /* Image zoom effect */
+        .blog-img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+            transition:transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-img{
+            transform:scale(1.1);
+        }
+
+        .blog-content{
+            padding:20px;
+        }
+
+        .blog-meta{
+            display:flex;
+            justify-content:space-between;
+            font-size:13px;
+            margin-bottom:10px;
+        }
+
+        .blog-tag{
+            color:var(--teal);
+            font-weight:600;
+        }
+
+        .blog-date{
+            color:#777;
+        }
+
+        /* Title style */
+        .blog-title{
+            font-weight:700;
+            margin-bottom:10px;
+            transition:color 0.3s;
+            cursor:pointer;
+        }
+
+        /* Title hover color */
+        .blog-title:hover{
+            color:var(--teal);
+        }
+
+        .blog-text{
+            color:#777;
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Blogs Post',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<!--blogs-->
+<section class="blog-section py-5">
+
+    <div class="container">
+        <!-- ================= BLOG SEARCH ================= -->
+        <div class="blog-search-bar mb-4">
+
+            <form method="get" th:action="@{/blogs}">
+                <div class="row align-items-center g-2">
+
+                    <!-- 🔍 Search -->
+                    <div class="col-md-7">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control search-input"
+                               placeholder="Search blogs..."
+                               th:value="${keyword}">
+                    </div>
+
+                    <!-- 📂 Dynamic Category -->
+                    <div class="col-md-3">
+                        <select name="category" class="form-select search-select">
+                            <option value="">All Categories</option>
+
+                            <option th:each="cat : ${categories}"
+                                    th:value="${cat}"
+                                    th:text="${cat}"
+                                    th:selected="${cat == category}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- 🔎 Button -->
+                    <div class="col-md-2">
+                        <button type="submit" class="btn-in w-100">
+                            <i class="ri-search-line me-1"></i> Search
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+        <!-- ================= BLOGS ================= -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4"
+                 th:each="blog : ${blogs}">
+
+                <!-- blog-card code -->
+                <div class="blog-card">
+
+                    <!-- Image -->
+                    <div class="blog-img-wrapper">
+
+                        <a th:href="@{/blog/{id}(id=${blog.id})}">
+                            <img th:if="${blog.images.size() > 0}"
+                                 th:src="@{'/uploads/blog/' + ${blog.images[0].imageUrl}}"
+                                 class="blog-img">
+                        </a>
+
+                    </div>
+
+                    <div class="blog-content">
+
+                        <!-- Meta -->
+                        <div class="blog-meta">
+
+            <span class="blog-tag">
+                <i class="ri-price-tag-3-line"></i>
+                <span th:text="${blog.category}"></span>
+            </span>
+
+                            <span class="blog-date">
+                <i class="ri-calendar-line"></i>
+                <span th:text="${#temporals.format(blog.createdAt,'dd MMM yyyy')}"></span>
+            </span>
+
+                        </div>
+
+                        <!-- Title -->
+                        <h5 class="blog-title">
+
+                            <a th:href="@{/blog/{id}(id=${blog.id})}"
+                               style="text-decoration:none;color:inherit;"
+                               th:text="${blog.title}">
+                            </a>
+
+                        </h5>
+                        <p class="blog-text"
+                           th:utext="${blog.content.length() > 120 ? blog.content.substring(0,120) + '...' : blog.content}">
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ================= NO BLOG FOUND CARD ================= -->
+        <div th:if="${blogs.size() == 0}" class="d-flex justify-content-center py-5">
+
+            <div class="card shadow-sm text-center p-4" style="max-width: 400px; width: 100%;">
+
+                <!-- Icon -->
+                <div class="mb-3">
+                    <i class="ri-article-line" style="font-size: 50px; color: #ccc;"></i>
+                </div>
+
+                <!-- Message -->
+                <h5 class="text-muted">No Blogs Found</h5>
+                <p class="text-muted small mb-3">
+                    Sorry, we couldn’t find any blogs matching your search.
+                </p>
+
+                <!-- Optional button -->
+                <a th:href="@{/blogs}" class="btn btn-primary btn-sm">
+                    Clear Filters
+                </a>
+
+            </div>
+
+        </div>
+
+        <!--                pagination section-->
+        <div th:if="${totalPages > 1}">
+            <div th:replace="~{fragments/pagination :: pagination('/blogs', ${currentPage}, ${totalPages})}"></div>
+        </div>
+
+    </div>
+
+</section>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

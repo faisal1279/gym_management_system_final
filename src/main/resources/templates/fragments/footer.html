@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<body>
+<section th:fragment="footer" class="gym-footer"
+         th:style="|background: linear-gradient(rgba(0,0,0,0.92), rgba(0,0,0,0.92)),
+    url('@{./fragments/images/footer/footer-bg.jpg}') center/cover no-repeat;
+    color:#ccc;
+    padding-top:80px;|">
+    <div class="container">
+        <div class="row">
+
+            <!-- Column 1 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="footer-about">
+                    <h3 class="logo">ZYMZOO</h3>
+                    <p>
+                        Zymzoo winner dolor sit consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna
+                    </p>
+
+                    <h6 class="footer-title">Opening time</h6>
+                    <p class="small-text">
+                        Monday - Friday: 7 am to 10 pm <br>
+                        Saturday - Sunday: 9 am to 10 pm
+                    </p>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">USEFULL LINK</h5>
+                <ul class="footer-links">
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Membership</a></li>
+                    <li><a href="#">Our Classes</a></li>
+                    <li><a href="#">Instructors</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Blog post</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">CONTACT INFO</h5>
+                <div class="contact-item">
+                    <strong>Address</strong>
+                    <p>252B, Central Street Main road <br> Belix Tower, New York, USA</p>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Phone</strong>
+                    <p>09 (123) 456 789 <br> 09 (987) 654 321</p>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Web</strong>
+                    <p>info@example.com <br> www.example.com</p>
+                </div>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-heading">NEWSLETTER</h5>
+                <p>
+                    Subscribe our Newsletter and gates latest updates of offers,
+                    products and promotions from every week we provide
+                </p>
+
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email here">
+                    <button type="submit">
+                        <i class="ri-send-plane-fill"></i>
+                    </button>
+                </form>
+
+                <div class="social-icons mt-4">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-twitter-fill"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom text-center">
+        <p>© 2021 Made with ❤️ by Faisal</p>
+    </div>
+</section>
+</body>
+</html>

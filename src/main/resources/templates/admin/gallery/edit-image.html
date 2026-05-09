@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+
+    <title>create blog</title>
+    <style>
+        .form-control{
+            border:1px solid #ccc;
+            border-radius:0;
+            padding:12px;
+        }
+
+        .form-control:focus{
+            border:1px solid #000;
+            box-shadow:none;
+            outline:none;
+        }
+
+        .create-btn{
+            width:100%;
+            background:#222;
+            color:#fff;
+            padding:12px;
+            font-weight:600;
+            letter-spacing:2px;
+            border:none;
+            transition: 0.3s;
+        }
+        .create-btn:hover{
+            background:var(--teal);
+            color:#fff;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div class="container py-5">
+
+                <h2 class="mb-4">Edit Image info</h2>
+
+                <form th:action="@{/admin/gallery/image/update/{id}(id=${img.id})}" method="post">
+
+                    <input type="text" name="title" th:value="${img.title}" class="form-control mb-2">
+
+                    <textarea name="description" th:text="${img.description}" class="form-control mb-2"></textarea>
+
+                    <input type="text" name="category" th:value="${img.category}" class="form-control mb-2">
+
+                    <button class="btn btn-success">Update</button>
+
+                </form>>
+            </div>
+
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

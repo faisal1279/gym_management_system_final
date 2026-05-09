@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Contact</title>
+
+    <style>
+        .contact-section{
+            background:#f5f5f5;
+        }
+
+        .contact-icon{
+            font-size:34px;
+            color:var(--teal);
+        }
+
+        .contact-input{
+            height:50px;
+            border-radius:4px;
+        }
+
+        textarea.contact-input{
+            height:auto;
+        }
+        .form-control{
+            border:1px solid #ccc;
+            border-radius:0;
+            padding:12px;
+        }
+
+        .form-control:focus{
+            border:1px solid #000;
+            box-shadow:none;
+            outline:none;
+        }
+
+        .contact-btn{
+            width:100%;
+            background:#222;
+            color:#fff;
+            padding:12px;
+            font-weight:600;
+            letter-spacing:2px;
+            border:none;
+            transition: 0.3s;
+        }
+
+        .contact-btn:hover{
+            background:var(--teal);
+            color:#fff;
+        }
+
+        .map-wrapper iframe{
+            border-radius:6px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'CONTACT US',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="contact-section py-5">
+
+    <div class="container">
+
+        <!-- Title -->
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+                GET IN <span class="text-warning">TOUCH</span>
+            </h2>
+
+            <p class="text-muted">
+                Contact us if you need information
+            </p>
+
+        </div>
+
+        <!-- Info Row -->
+        <div class="row text-center mb-5 g-4">
+
+            <div class="col-md-4">
+
+                <i class="ri-map-pin-line contact-icon"></i>
+
+                <p class="mt-3 mb-0">
+                    252B, Central Street Main road<br>
+                    Belix Tower, New York, USA
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <i class="ri-phone-line contact-icon"></i>
+
+                <p class="mt-3 mb-0">
+                    09 (123) 456 789<br>
+                    09 (987) 654 321
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <i class="ri-global-line contact-icon"></i>
+
+                <p class="mt-3 mb-0">
+                    info@example.com<br>
+                    www.example.com
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Form + Map -->
+        <div class="row g-5  align-items-start">
+
+            <!-- Contact Form -->
+            <div class="col-lg-6">
+
+                <h4 class="fw-bold mb-3">Send Message</h4>
+
+                <p class="text-muted mb-4">
+                    If you need any information, feel free to send me message
+                </p>
+
+                <form>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6 mb-2">
+
+                            <input type="text"
+                                   class="form-control contact-input"
+                                   placeholder="Name">
+
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+
+                            <input type="email"
+                                   class="form-control contact-input"
+                                   placeholder="Email">
+
+                        </div>
+
+                        <div class="col-12 my-2">
+
+                            <textarea class="form-control contact-input"
+                                      rows="6"
+                                      placeholder="Write message here"></textarea>
+                        </div>
+
+                        <div class="col-12">
+
+                            <button class="btn contact-btn">
+
+                                SEND MESSAGE
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Map -->
+            <div class="col-lg-6 my-2">
+
+                <div class="map-wrapper">
+
+                    <iframe
+                            src="https://www.google.com/maps?q=Melbourne+CBD&output=embed"
+                            width="100%"
+                            height="350"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/login-page.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+<!--Navbar-->
+<div th:replace="fragments/navbar :: navbar"></div>
+<!--Registration Page-->
+<!--<div class="auth-container">-->
+<!--    <form class="auth-card" th:action="@{/register}" method="post" enctype="multipart/form-data">-->
+<!--        <h2>Create Account</h2>-->
+<!--        <p class="msg success" th:if="${message}" th:text="${message}">-->
+<!--        <p class="msg error" th:if="${error}" th:text="${error}">-->
+<!--        </p>-->
+<!--        <div class="row">-->
+<!--            <input type="text" name="firstName" placeholder="First Name" required>-->
+<!--            <input type="text" name="lastName" placeholder="Last Name" required>-->
+<!--        </div>-->
+
+<!--        <input type="email" name="email" placeholder="Email Address" required>-->
+
+<!--        <input type="text" name="phone" placeholder="Phone Number">-->
+
+<!--        <select name="gender">-->
+<!--            <option value="">Select Gender</option>-->
+<!--            <option>Male</option>-->
+<!--            <option>Female</option>-->
+<!--            <option>Other</option>-->
+<!--        </select>-->
+
+<!--        <textarea name="address" placeholder="Address"></textarea>-->
+
+<!--        <input type="password" name="password" placeholder="Password" required>-->
+
+<!--        <input type="file" name="profileImage" accept="image/*"/>-->
+<!--        <button type="submit">Register</button>-->
+
+<!--        <p class="switch">-->
+<!--            Already have an account?-->
+<!--            <a th:href="@{/login}">Login</a>-->
+<!--        </p>-->
+<!--    </form>-->
+<!--</div>-->
+
+<div class="container login-wrapper">
+
+    <div class="login-box my-5">
+
+        <!-- Header -->
+        <div class="login-header d-flex justify-content-between">
+            <h3>REGISTER</h3>
+            <a th:href="@{/login}" class="register-link">Login</a>
+        </div>
+
+        <form th:action="@{/register}" method="post" enctype="multipart/form-data">
+
+            <!-- Success Message -->
+            <div class="alert alert-success text-center"
+                 th:if="${message}" th:text="${message}">
+            </div>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger text-center"
+                 th:if="${error}" th:text="${error}">
+            </div>
+
+            <!-- Name -->
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label">First Name *</label>
+                    <input type="text" class="form-control" name="firstName" required>
+                </div>
+
+                <div class="col">
+                    <label class="form-label">Last Name *</label>
+                    <input type="text" class="form-control" name="lastName" required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email Address *</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="phone">
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="gender">
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label class="form-label">Address</label>
+                <textarea class="form-control" name="address" rows="3"></textarea>
+            </div>
+
+            <!-- Password -->
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label">Password *</label>-->
+<!--                <input type="password" class="form-control" name="password" required>-->
+<!--            </div>-->
+            <div class="mb-3 password-field">
+                <label class="form-label">Password *</label>
+
+                <div class="password-wrapper">
+                    <input type="password" class="form-control" name="password" id="password" required>
+
+                    <i class="ri-eye-line toggle-password" onclick="togglePassword()"></i>
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="mb-3">
+                <label class="form-label">Profile Image</label>
+                <input type="file" class="form-control" name="profileImage" accept="image/*">
+            </div>
+
+            <!-- Button -->
+            <button type="submit" class="btn login-btn">
+                REGISTER
+            </button>
+
+            <!-- Switch -->
+            <p class="lost-password mt-3">
+                Already have an account?
+                <a th:href="@{/login}">Login</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!--Footer-->
+<div th:replace="fragments/footer :: footer"></div>
+
+<script>
+    function togglePassword(){
+
+        const password = document.getElementById("password");
+        const icon = document.querySelector(".toggle-password");
+
+        if(password.type === "password"){
+            password.type = "text";
+            icon.classList.remove("ri-eye-line");
+            icon.classList.add("ri-eye-off-line");
+        }else{
+            password.type = "password";
+            icon.classList.remove("ri-eye-off-line");
+            icon.classList.add("ri-eye-line");
+        }
+
+    }
+</script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

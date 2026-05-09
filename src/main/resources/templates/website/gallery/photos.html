@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Photos</title>
+    <style>
+        /* SECTION */
+        .gallery-section{
+            background:#f9fafb;
+        }
+
+        /* TITLE */
+        .gallery-title{
+            font-size:32px;
+            font-weight:900;
+            letter-spacing:1px;
+        }
+
+        .gallery-title span{
+            color:var(--teal);
+        }
+
+        /* CARD */
+        .gallery-card{
+            position:relative;
+            overflow:hidden;
+            box-shadow:0 10px 25px rgba(0,0,0,0.05);
+            cursor:pointer;
+            margin: 5px;
+        }
+
+        /* IMAGE */
+        .gallery-card img{
+            width:100%;
+            height:240px;
+            object-fit:cover;
+            transition:0.5s ease;
+        }
+
+        /*  ZOOM EFFECT */
+        .gallery-card:hover img{
+            transform:scale(1.12);
+        }
+
+        /* OVERLAY */
+        .overlay{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+
+            background:linear-gradient(
+                    to top,
+                    rgba(0,0,0,0.7),
+                    rgba(0,0,0,0.2)
+            );
+
+            opacity:0;
+            transition:0.4s;
+        }
+
+        /* TITLE */
+        .overlay h6{
+            color:#fff;
+            font-weight:700;
+            font-size:16px;
+            transform:translateY(20px);
+            transition:0.4s;
+        }
+
+        /* HOVER EFFECT */
+        .gallery-card:hover .overlay{
+            opacity:1;
+        }
+
+        .gallery-card:hover .overlay h6{
+            transform:translateY(0);
+        }
+
+        /* MOBILE */
+        @media(max-width:768px){
+
+            .gallery-title{
+                font-size:24px;
+            }
+
+            .gallery-card img{
+                height:200px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Photos',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="gallery-section py-5">
+
+    <div class="container">
+
+        <h2 class="gallery-title text-center mb-5">
+            OUR <span>GALLERY</span>
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-4 col-sm-6"
+                 th:each="img : ${images}">
+
+                <div class="gallery-card">
+
+                    <a th:href="@{/gallery/photo/{id}(id=${img.id})}">
+
+                        <img th:src="@{'/uploads/gallery/' + ${img.imageUrl}}">
+
+                        <div class="overlay">
+
+                            <h6 th:text="${img.title}"></h6>
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

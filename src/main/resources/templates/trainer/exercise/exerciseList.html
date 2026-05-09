@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+
+
+
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/trainer-sideber :: trainerSidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div th:if="${message}" class="alert alert-success">
+                <span th:text="${message}"></span>
+            </div>
+            <div class="container-fluid py-4">
+
+                <!-- Page Title -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold">Exercises</h2>
+
+                    <a th:href="@{/trainer/exercise/create}"
+                       class="btn btn-success">
+                        <i class="ri-add-line"></i> Add Exercise
+                    </a>
+                </div>
+
+                <!-- Card -->
+                <div class="card shadow-sm border-0 rounded-4">
+
+                    <div class="card-body">
+
+                        <!-- ================= EXERCISE SEARCH ================= -->
+                        <div class="exercise-search mb-4">
+
+                            <form method="get" th:action="@{/trainer/exercise}">
+                                <div class="row g-2 align-items-center">
+
+                                    <!-- 🔍 Name Search -->
+                                    <div class="col-md-6">
+                                        <input type="text"
+                                               name="keyword"
+                                               class="form-control"
+                                               placeholder="Search exercise name..."
+                                               th:value="${keyword}">
+                                    </div>
+
+                                    <!-- 📌 Active Filter -->
+                                    <div class="col-md-4">
+                                        <select name="active" class="form-select">
+
+                                            <option value="">All Status</option>
+
+                                            <option value="true" th:selected="${active == true}">
+                                                Active
+                                            </option>
+
+                                            <option value="false" th:selected="${active == false}">
+                                                Inactive
+                                            </option>
+
+                                        </select>
+                                    </div>
+
+                                    <!-- 🔎 Button -->
+                                    <div class="col-md-2">
+                                        <button class="btn w-100 btn-in ">
+                                            Search
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle">
+
+                                <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                                </thead>
+
+
+                                <!-- If list has data -->
+                                <tbody th:if="${!#lists.isEmpty(exerciseList)}">
+
+                                <tr th:each="ex : ${exerciseList}">
+
+                                    <td class="fw-semibold"
+                                        th:text="${ex.name}">
+                                    </td>
+
+                                    <td class="text-muted text-truncate" style="max-width: 200px;"
+                                        th:title="${ex.description}"
+                                        th:text="${ex.description}">
+                                    </td>
+
+                                    <td>
+                                        <span class="badge text-truncate"
+                                              style="max-width: 120px;"
+                                              th:classappend="${ex.active} ? 'bg-success' : 'bg-secondary'"
+                                              th:title="${ex.active} ? 'This exercise is active' : 'This exercise is inactive'"
+                                              th:text="${ex.active} ? 'ACTIVE' : 'INACTIVE'">
+</span>
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a th:href="@{'/trainer/exercise/' + ${ex.exerciseId}}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="ri-eye-line"></i> View
+                                        </a>
+
+                                        <!-- EDIT + DELETE only owner -->
+                                        <span th:if="${ex.createdBy != null and ex.createdBy.email == principal}">
+
+        <a th:href="@{'/trainer/exercise/edit/' + ${ex.exerciseId}}"
+           class="btn btn-sm btn-outline-warning">
+            <i class="ri-edit-line"></i> Edit
+        </a>
+
+        <a th:href="@{'/trainer/exercise/delete/' + ${ex.exerciseId}}"
+           class="btn btn-sm btn-outline-danger">
+            <i class="ri-delete-bin-line"></i> Delete
+        </a>
+
+    </span>
+
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+
+
+                                <!-- If list empty -->
+                                <tbody th:if="${#lists.isEmpty(exerciseList)}">
+
+                                <tr>
+                                    <td colspan="4" class="text-center py-5">
+
+                                        <i class="ri-inbox-line"
+                                           style="font-size:40px;color:#bbb;"></i>
+
+                                        <p class="mt-2 text-muted">
+                                            No exercises found
+                                        </p>
+
+                                    </td>
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+                            <!--                pagination section-->
+                            <div th:if="${totalPages > 1}">
+                                <div th:replace="fragments/pagination :: pagination('/trainer/exercise', ${currentPage}, ${totalPages})"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

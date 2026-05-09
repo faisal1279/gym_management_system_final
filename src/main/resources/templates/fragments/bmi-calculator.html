@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+<section th:fragment="bmi-calculator" class="bmi-section">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- LEFT -->
+            <div class="col-lg-6">
+
+                <h2 class="membership-title">WHAT IS BMI</h2>
+
+                <p class="bmi-desc">
+                    Calculate your Body Mass Index & daily calorie needs instantly.
+                </p>
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6 mb-2">
+                        <input type="number" id="height" class="form-control w-100" placeholder="Height / cm">
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-2">
+                        <input type="number" id="weight" class="form-control w-100" placeholder="Weight / kg">
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-2">
+                        <input type="number" id="age" class="form-control w-100" placeholder="Age">
+                    </div>
+
+                    <div class="col-12 col-md-6 mb-2">
+                        <select id="gender" class="form-select w-100">
+                            <option value="">Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+<!--                    <div class="col-12 col-md-6 mb-2">-->
+<!--                        <select id="activity" class="form-select w-100">-->
+<!--                            <option value="">Activity Level</option>-->
+<!--                            <option value="1.2">Sedentary</option>-->
+<!--                            <option value="1.375">Lightly Active</option>-->
+<!--                            <option value="1.55">Moderate</option>-->
+<!--                            <option value="1.725">Very Active</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+                    <div class="col-12">
+                        <select id="activity" class="form-select w-100">
+                            <option value="">Activity Level</option>
+                            <option value="1.2">Sedentary</option>
+                            <option value="1.375">Lightly Active</option>
+                            <option value="1.55">Moderate</option>
+                            <option value="1.725">Very Active</option>
+                        </select>
+                    </div>
+
+                </div>
+                <button class="bmi-btn mt-4" onclick="calculateAll()">
+                    CALCULATE →
+                </button>
+
+                <!-- RESULT -->
+                <div id="resultBox" class="result-box mt-4 d-none">
+
+                    <div class="result-text"></div>
+
+                    <div class="progress mt-3">
+                        <div id="bmiBar" class="progress-bar"></div>
+                    </div>
+
+                    <div class="bmr-text mt-3"></div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="col-lg-6 mt-5 mt-lg-0">
+
+                <div class="bmi-table">
+
+                    <div class="bmi-row header">
+                        <div>BMI</div>
+                        <div>STATUS</div>
+                    </div>
+
+                    <div class="bmi-row"><div>Below 18.5</div><div>Underweight</div></div>
+                    <div class="bmi-row"><div>18.5 – 24.9</div><div>Healthy</div></div>
+                    <div class="bmi-row"><div>25 – 29.9</div><div>Overweight</div></div>
+                    <div class="bmi-row"><div>30+</div><div>Obese</div></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+</body>
+</html>

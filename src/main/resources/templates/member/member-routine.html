@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/member-dashboard.css}">
+    <title>Admin Dashboard</title>
+
+    <style>
+
+        .routine-calendar th{
+            width:14.28%;
+        }
+
+        .calendar-cell{
+            height:150px;
+            vertical-align:top;
+        }
+
+        .exercise-link{
+            display:block;
+            background:#f8f9fa;
+            margin-bottom:5px;
+            padding:6px;
+            border-radius:5px;
+            text-decoration:none;
+            color:#212529;
+        }
+
+        .exercise-link:hover{
+            background:#e9ecef;
+            color:#0d6efd;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/member-sideber :: memberSidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+<!--        <div class="container py-4">-->
+
+<!--            &lt;!&ndash; Page Title &ndash;&gt;-->
+<!--            <div class="mb-4">-->
+<!--                <h2 class="fw-bold">My Workout Routine</h2>-->
+<!--                <p class="text-muted mb-0">Follow your assigned workout plan</p>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Error &ndash;&gt;-->
+<!--            <div th:if="${error}"-->
+<!--                 class="alert alert-danger"-->
+<!--                 th:text="${error}">-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Multiple Routines &ndash;&gt;-->
+<!--            <div th:each="routine : ${routines}"-->
+<!--                 class="card border-0 shadow-sm rounded-4 mb-4">-->
+
+<!--                <div class="card-body p-4">-->
+
+<!--                    &lt;!&ndash; Routine Header &ndash;&gt;-->
+<!--                    <div class="mb-4">-->
+
+<!--                        <h4 class="fw-bold mb-1"-->
+<!--                            th:text="${routine.template.name}">-->
+<!--                        </h4>-->
+
+<!--                        <p class="text-muted mb-0">-->
+<!--                            Level :-->
+<!--                            <span th:text="${routine.template.level}"></span>-->
+<!--                        </p>-->
+
+<!--                    </div>-->
+
+<!--                    <div class="row g-4">-->
+
+<!--                        &lt;!&ndash; Day &ndash;&gt;-->
+<!--                        <div class="col-lg-4 col-md-6"-->
+<!--                             th:each="day : ${routine.template.days}">-->
+
+<!--                            <div class="card border-0 shadow-sm h-100 routine-day-card">-->
+
+<!--                                <div class="card-header bg-dark text-white text-center">-->
+
+<!--                                    <span th:text="${day.day}"></span>-->
+
+<!--                                </div>-->
+
+<!--                                <div class="card-body">-->
+
+<!--                                    &lt;!&ndash; Exercises &ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div th:each="ex : ${day.exercises}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                         class="mb-2">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                <span class="fw-semibold"&ndash;&gt;-->
+<!--&lt;!&ndash;                                      th:text="${ex.exercise.name}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                </span>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                        <div class="small text-muted">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                            <span th:text="${ex.sets}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            sets ×&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <span th:text="${ex.reps}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            reps&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--                                    &lt;!&ndash; Exercises &ndash;&gt;-->
+<!--                                    <div th:each="ex : ${day.exercises}"-->
+<!--                                         class="mb-3 p-2 border rounded">-->
+
+<!--                                        <div class="d-flex justify-content-between align-items-center">-->
+
+<!--                                            <div>-->
+
+<!--            <span class="fw-semibold"-->
+<!--                  th:text="${ex.exercise.name}">-->
+<!--            </span>-->
+
+<!--                                                <div class="small text-muted">-->
+
+<!--                                                    <span th:text="${ex.sets}"></span>-->
+<!--                                                    sets ×-->
+<!--                                                    <span th:text="${ex.reps}"></span>-->
+<!--                                                    reps-->
+
+<!--                                                </div>-->
+
+<!--                                            </div>-->
+
+<!--                                            &lt;!&ndash; View Button &ndash;&gt;-->
+<!--                                            <a class="btn btn-sm btn-outline-primary"-->
+<!--                                               th:href="@{/member/exercise/details/{id}-->
+<!--   (id=${ex.exercise.exerciseId},-->
+<!--   sets=${ex.sets},-->
+<!--   reps=${ex.reps})}">-->
+<!--                                                View-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                            </div>-->
+
+<!--                        </div>-->
+
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+
+<!--        </div>-->
+        <div class="container py-4">
+
+            <!-- Page Title -->
+            <div class="mb-4">
+                <h2 class="fw-bold">My Workout Routine</h2>
+                <p class="text-muted mb-0">Follow your assigned workout plan</p>
+            </div>
+
+            <!-- Error -->
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <!-- Routines -->
+            <div th:each="routine : ${routines}" class="mb-5">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold mb-0" th:text="${routine.template.name}"></h4>
+                    <span class="badge bg-primary">
+                Level: <span th:text="${routine.template.level}"></span>
+            </span>
+                </div>
+
+                <!-- Calendar Table -->
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered routine-calendar text-center">
+
+                        <!-- Day Header -->
+                        <thead class="table-dark">
+                        <tr>
+                            <th th:each="day : ${routine.template.days}"
+                                th:text="${day.day}">
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <!-- Exercise Row -->
+                        <tbody>
+                        <tr>
+
+                            <td th:each="day : ${routine.template.days}" class="calendar-cell">
+
+                                <div th:each="ex : ${day.exercises}" class="exercise-item">
+
+                                    <a th:href="@{/member/exercise/details/{id}(id=${ex.exercise.exerciseId}, sets=${ex.sets}, reps=${ex.reps})}"
+                                       class="exercise-link"
+                                       th:text="${ex.exercise.name}">
+                                    </a>
+
+                                </div>
+
+                                <div th:if="${#lists.isEmpty(day.exercises)}"
+                                     class="text-muted small">
+                                    Rest
+                                </div>
+
+                            </td>
+
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

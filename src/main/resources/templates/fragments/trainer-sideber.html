@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<body>
+
+<!-- Trainer Sidebar -->
+<aside th:fragment="trainerSidebar" class="sidebar">
+    <h2>Trainer Panel</h2>
+
+    <ul>
+
+        <li>
+            <a th:href="@{/trainer/dashboard}">
+                <i class="ri-dashboard-line"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/trainer/members}">
+                <i class="ri-group-line"></i>
+                <span>My Members</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/trainer/attendance}">
+                <i class="ri-calendar-check-line"></i>
+                <span>Attendance</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/trainer/exercise}">
+                <i class="ri-calendar-check-line"></i>
+                <span>Exercise</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/trainer/template}">
+                <i class="ri-calendar-check-line"></i>
+                <span>Template</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/trainer/progress}">
+                <i class="ri-line-chart-line"></i>
+                <span>Progress</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/profile}">
+                <i class="ri-user-settings-line"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+
+    </ul>
+
+</aside>
+
+</body>
+</html>

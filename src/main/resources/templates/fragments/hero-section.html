@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<section class="common-hero"
+         th:fragment="hero(title, subtitle, bgImage)"
+         th:style="'background-image:url(' + ${bgImage} + ')'">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content text-white">
+        <div class="row">
+            <div class="col-lg-7">
+                <h1 class="hero-title">
+                    <span th:text="${title}">ABOUT</span>
+                </h1>
+
+                <p class="hero-subtitle mt-3"
+                   th:text="${subtitle}">
+                    Subtitle text here
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

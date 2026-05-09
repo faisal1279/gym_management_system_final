@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/member-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+
+    <title>Member List</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/trainer-sideber :: trainerSidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container mt-4">
+
+            <!-- SUCCESS MESSAGE -->
+            <div th:if="${success}" class="alert alert-success">
+                <span th:text="${success}"></span>
+            </div>
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body">
+
+                    <h4 class="mb-4">My Members</h4>
+
+                    <!-- =========================
+                         DESKTOP TABLE
+                    ========================== -->
+
+                    <div class="table-responsive d-none d-md-block">
+
+                        <table class="table table-hover align-middle">
+
+                            <thead class="table-light">
+                            <tr>
+                                <th>Member</th>
+                                <th>Email</th>
+                                <th>Membership</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="m : ${members}">
+
+                                <!-- MEMBER -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        <img th:if="${m.user.profileImage != null}"
+                                             th:src="@{'/uploads/profile/' + ${m.user.profileImage}}"
+                                             class="rounded-circle"
+                                             style="width:45px;height:45px;object-fit:cover">
+
+                                        <div th:if="${m.user.profileImage == null}"
+                                             class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                             style="width:45px;height:45px;">
+                                            <i class="ri-user-3-line text-secondary"></i>
+                                        </div>
+
+                                        <div class="fw-semibold"
+                                             th:text="${m.user.firstName + ' ' + m.user.lastName}">
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                <td th:text="${m.user.email}"></td>
+
+                                <td th:text="${m.membership.name}"></td>
+
+                                <td th:text="${m.endDate}"></td>
+
+                                <td>
+                        <span th:if="${m.active}" class="badge bg-success">
+                            Active
+                        </span>
+
+                                    <span th:if="${!m.active}" class="badge bg-danger">
+                            Expired
+                        </span>
+                                </td>
+
+                                <td class="d-flex gap-2">
+
+                                    <a th:href="@{/trainer/member/{id}/assign(id=${m.memberId})}"
+                                       class="btn btn-sm btn-outline-primary">
+                                        Assign
+                                    </a>
+
+                                    <a th:href="@{/trainer/member/{id}/view(id=${m.memberId})}"
+                                       class="btn btn-sm btn-outline-dark">
+                                        View
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            <tr th:if="${members.size() == 0}">
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    No members assigned yet
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+                        <!--                pagination section-->
+                        <div th:if="${totalPages > 1}">
+                            <div th:replace="fragments/pagination :: pagination('/trainer/members', ${currentPage}, ${totalPages})"></div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         MOBILE CARD VIEW
+                    ========================== -->
+
+                    <div class="d-md-none">
+
+                        <div th:each="m : ${members}"
+                             class="card mb-3 shadow-sm border-0">
+
+                            <div class="card-body">
+
+                                <!-- Member header -->
+                                <div class="d-flex align-items-center gap-3 mb-3">
+
+                                    <img th:if="${m.user.profileImage != null}"
+                                         th:src="@{'/uploads/profile/' + ${m.user.profileImage}}"
+                                         class="rounded-circle"
+                                         style="width:50px;height:50px;object-fit:cover">
+
+                                    <div th:if="${m.user.profileImage == null}"
+                                         class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                         style="width:50px;height:50px;">
+                                        <i class="ri-user-3-line text-secondary"></i>
+                                    </div>
+
+                                    <div>
+                                        <div class="fw-semibold"
+                                             th:text="${m.user.firstName + ' ' + m.user.lastName}">
+                                        </div>
+
+                                        <small class="text-muted"
+                                               th:text="${m.user.email}">
+                                        </small>
+                                    </div>
+
+                                </div>
+
+                                <!-- Info Grid -->
+                                <div class="row text-sm mb-3">
+
+                                    <div class="col-6 mb-2">
+                                        <small class="text-muted d-block">Membership</small>
+                                        <span th:text="${m.membership.name}"></span>
+                                    </div>
+
+                                    <div class="col-6 mb-2">
+                                        <small class="text-muted d-block">End Date</small>
+                                        <span th:text="${m.endDate}"></span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <small class="text-muted d-block">Status</small>
+
+                                        <span th:if="${m.active}" class="badge bg-success">
+                        Active
+                    </span>
+
+                                        <span th:if="${!m.active}" class="badge bg-danger">
+                        Expired
+                    </span>
+                                    </div>
+
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="d-flex gap-2">
+
+                                    <a th:href="@{/trainer/member/{id}/assign(id=${m.memberId})}"
+                                       class="btn btn-sm btn-primary w-50">
+                                        Assign Routine
+                                    </a>
+
+                                    <a th:href="@{/trainer/member/{id}/view(id=${m.memberId})}"
+                                       class="btn btn-sm btn-outline-dark w-50">
+                                        View
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--                pagination section-->
+                        <div th:if="${totalPages > 1}">
+                            <div th:replace="fragments/pagination :: pagination('/trainer/members', ${currentPage}, ${totalPages})"></div>
+                        </div>
+
+                        <!-- Empty state -->
+                        <div th:if="${members.size() == 0}"
+                             class="text-center text-muted py-4">
+                            No members assigned yet
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+.bmi-section{
+    background:#f8f8f8;
+    padding:80px 0;
+}
+
+.bmi-title{
+    font-size:48px;
+    font-weight:900;
+}
+
+.bmi-desc{
+    color:#777;
+    margin-bottom:25px;
+}
+
+/* COMMON INPUT STYLE */
+.form-control,
+.form-select {
+    width: 100%;
+    height: 55px;              /* SAME HEIGHT */
+    padding: 0 15px;           /* SAME PADDING */
+    border: 1px solid #ddd;
+    font-size: 15px;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+/* REMOVE DEFAULT SELECT STYLE */
+.form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 20 20' width='20'><path d='M5 7l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* FOCUS EFFECT */
+.form-control:focus,
+.form-select:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+    outline: none;
+}
+
+/* PLACEHOLDER */
+.form-control::placeholder {
+    color: #aaa;
+}
+
+/* GAP FIX */
+.row.g-4 > [class*='col-'] {
+    margin-bottom: 10px;
+}
+
+.bmi-btn{
+    width:100%;
+    background:#222;
+    color:#fff;
+    padding:12px;
+    font-weight:600;
+    letter-spacing:2px;
+    border:none;
+    transition: 0.3s;
+}
+.bmi-btn:hover{
+    background:var(--teal);
+    color:#fff;
+}
+
+/* RESULT */
+.result-box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.result-text{
+    font-size:20px;
+    font-weight:600;
+}
+
+/* PROGRESS */
+.progress{
+    height:10px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    transition:0.6s;
+}
+
+/* TABLE */
+.bmi-table{
+    border-left:1px solid #ddd;
+    padding-left:30px;
+}
+
+.bmi-row{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+.form-control:hover,
+.form-select:hover {
+    border-color: #000;
+}
+.bmi-row.header{
+    font-weight:700;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .bmi-title{font-size:32px;}
+    .bmi-table{border:none;padding:0;margin-top:30px;}
+}

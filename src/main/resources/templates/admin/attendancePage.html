@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+
+
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <h4 class="mb-0">Today's Attendance</h4>
+
+                        <form method="get" class="d-flex gap-2">
+                            <input type="date"
+                                   name="date"
+                                   th:value="${date}"
+                                   class="form-control form-control-sm">
+                            <button class="btn btn-primary btn-sm">View</button>
+                        </form>
+                    </div>
+
+                    <hr>
+
+                    <p class="mb-2">
+                        <strong>Total Present:</strong>
+                        <span class="badge bg-success fs-6"
+                              th:text="${todayCount}"></span>
+                    </p>
+
+                    <!-- Flash Messages -->
+                    <div th:if="${message}" class="alert alert-success py-2"
+                         th:text="${message}"></div>
+
+                    <div th:if="${error}" class="alert alert-danger py-2"
+                         th:text="${error}"></div>
+
+                </div>
+            </div>
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+
+                    <h5 class="mb-3">Mark Attendance</h5>
+
+                    <form method="post" th:action="@{/admin/attendance}">
+                        <input type="hidden" name="date" th:value="${date}">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th class="d-none d-md-table-cell">Trainer</th>
+                                    <th class="text-center">Present</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each="m, i : ${members}">
+                                    <td th:text="${i.count}"></td>
+
+                                    <td th:text="${m.user.lastName}"></td>
+
+                                    <td class="d-none d-md-table-cell"
+                                        th:text="${m.trainer != null ?
+                            m.trainer.user.lastName : 'N/A'}"></td>
+
+                                    <td class="text-center">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               th:name="'present_' + ${m.memberId}"
+                                               th:checked="${attendanceMap[m.memberId]}">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="text-end mt-3">
+                            <button class="btn btn-success">
+                                Save Attendance
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+
+                    <h5 class="mb-3">Attendance List</h5>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="a : ${attendanceList}">
+                                <td th:text="${a.member.user.lastName}"></td>
+                                <td th:text="${a.date}"></td>
+
+                                <td>
+                        <span th:if="${a.present}"
+                              class="badge bg-success">Present</span>
+                                    <span th:if="${!a.present}"
+                                          class="badge bg-danger">Absent</span>
+                                </td>
+
+                                <td class="text-nowrap">
+                                    <form method="post"
+                                          th:action="@{/admin/attendance/{id}/update(id=${a.attendanceId})}"
+                                          class="d-inline">
+
+                                        <select name="present"
+                                                class="form-select form-select-sm d-inline w-auto">
+                                            <option value="true"
+                                                    th:selected="${a.present}">Present</option>
+                                            <option value="false"
+                                                    th:selected="${!a.present}">Absent</option>
+                                        </select>
+
+                                        <button class="btn btn-warning btn-sm ms-1">
+                                            Update
+                                        </button>
+                                    </form>
+
+                                    <form method="post"
+                                          th:action="@{/admin/attendance/{id}/delete(id=${a.attendanceId})}"
+                                          class="d-inline"
+                                          onsubmit="return confirm('Delete attendance?')">
+
+                                        <button class="btn btn-danger btn-sm ms-1">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

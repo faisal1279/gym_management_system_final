@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/hero.css}">
+    <link rel="stylesheet" th:href="@{/css/class-provide.css}">
+    <link rel="stylesheet" th:href="@{/css/bmi-calculator.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Title</title>
+</head>
+<body>
+    <!--Navbar-->
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <!--Hero Section  -->
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <!-- Model PNG -->
+        <img
+                th:src="@{/images/hero/h-1.webp}"
+                class="model animated-model"
+                alt="model"
+                data-aos="zoom-in"
+        />
+        <!-- Text -->
+        <div class="hero-content" data-aos="fade-right">
+            <h1>TIME TO<br /><span>GET FIT</span></h1>
+            <p>
+                Build your body, boost your strength, and stay healthy with our
+                fitness training.
+            </p>
+            <a href="#" class="btn">Join Now</a>
+        </div>
+    </section>
+
+    <!-- ================= 4 CARDS ================= -->
+    <div class="cards">
+        <div class="card" data-aos="fade-up" data-aos-delay="100" th:style="|background-image: url('@{/images/hero/f1.webp}')|">
+            <div class="info">
+                Dumble Lift<br /><small>3 Sets, 5 Minutes</small>
+            </div>
+        </div>
+
+        <div class="card" data-aos="fade-up" data-aos-delay="100" th:style="|background-image: url('@{/images/hero/f2.webp}')|">
+            <div class="info">
+                Weight Lifting<br /><small>4 Sets, 3 Minutes</small>
+            </div>
+        </div>
+
+        <div class="card" data-aos="fade-up" data-aos-delay="100" th:style="|background-image: url('@{/images/hero/f3.webp}')|">
+            <div class="info">
+                Rowing Machine<br /><small>2 Sets, 3 Minutes</small>
+            </div>
+        </div>
+
+        <div class="card" data-aos="fade-up" data-aos-delay="100" th:style="|background-image: url('@{/images/hero/f4.webp}')|">
+            <div class="info">
+                Rope Training<br /><small>5 Sets, 2 Minutes</small>
+            </div>
+        </div>
+    </div>
+
+<!--==============================About feature========================================-->
+    <section class="about-hero py-5">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- LEFT IMAGE -->
+                <div data-aos="fade-right" class="col-lg-6 position-relative text-center mb-4 mb-lg-0">
+
+                    <img th:src="@{/images/aboutfeauture/1.webp}"
+                         class="img-fluid hero-img"
+                         alt="Fitness">
+
+                    <!-- Triangle Decorations -->
+                    <div class="triangle-left"></div>
+                    <div class="triangle-right"></div>
+
+                </div>
+
+                <!-- RIGHT CONTENT -->
+                <div class="col-lg-6" data-aos="fade-left">
+
+                    <h6 class="small-title">SCIENCE 2005</h6>
+
+                    <h1 class="main-title">
+                        BEST <span>EQUIPMENTS</span><br>
+                        & FITNESS TRAINERS
+                    </h1>
+
+                    <p class="hero-text">
+                        Gym is very important to maintain our health utas sit fugif,
+                        sed quia cuuntur magni dolores eos qui rati one voluptas
+                        pleasure rationally encounter consequences that are extremely.
+                    </p>
+
+                    <!-- Feature List -->
+                    <div class="row feature-list mt-4">
+                        <div class="col-6">
+                            <p><i class="ri-checkbox-blank-circle-line"></i> Builds Aerobic Power</p>
+                            <p><i class="ri-checkbox-blank-circle-line"></i> Boots your Memory</p>
+                        </div>
+                        <div class="col-6">
+                            <p><i class="ri-checkbox-blank-circle-line"></i> Strong body Structure</p>
+                            <p><i class="ri-checkbox-blank-circle-line"></i> Bring about restful Sleep</p>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="mt-4 d-flex align-items-center gap-4">
+
+                        <a href="#" class="" id="btn">LET'S START</a>
+
+                        <div class="intro-video">
+                        <span class="play-btn">
+                            <i class="ri-play-fill"></i>
+                        </span>
+                            <span>INTRO VIDEO</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gym-feature-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- LEFT -->
+                <div class="col-lg-8 gym-dark-area">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="gym-feature-box" data-aos="fade-up" data-aos-delay="100">
+                                <div class="gym-icon">
+<!--                                    <i class="ri-barbell-fill"></i>-->
+                                    <i class="ri-user-3-fill"></i>
+
+                                </div>
+                                <div>
+                                    <h4>Best Training</h4>
+                                    <p>Best Training dolor sit consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="gym-feature-box" data-aos="fade-up" data-aos-delay="100">
+                                <div class="gym-icon">
+                                    <i class="ri-user-3-fill"></i>
+                                </div>
+                                <div>
+                                    <h4>Qualified Instructor</h4>
+                                    <p>Qualified Instructor consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="gym-feature-box">
+                                <div class="gym-icon">
+                                    <i class="ri-run-fill"></i>
+                                </div>
+                                <div>
+                                    <h4>Latest Equipment</h4>
+                                    <p>Latest equipment dolor sit consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <div class="gym-feature-box" data-aos="fade-up" data-aos-delay="100">
+                                <div class="gym-icon">
+                                    <i class="ri-trophy-fill"></i>
+                                </div>
+                                <div>
+                                    <h4>Award Winners</h4>
+                                    <p>Award winner dolor sit consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-lg-4 gym-discount-area">
+                    <div class="discount-wrapper" data-aos="zoom-in">
+                        <img th:src="@{/images/aboutfeauture/f1.webp}" alt="Discount">
+
+                        <div class="discount-content">
+                            <h1>35%</h1>
+                            <h5>DISCOUNT</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<!-- ==============================class provide=================================================   -->
+    <section class="classes-section py-5 bg-light">
+
+        <div class="container">
+
+            <!-- Section Title -->
+            <div class="text-center mb-5">
+                <h2 class="membership-title">
+                    CLASSES  <span>WE PROVIDE</span>
+                </h2>
+                <p class="text-muted">
+                    Gym classes dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore.
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- Single Class Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div data-aos="zoom-in-up" data-aos-delay="100" class="class-card position-relative overflow-hidden shadow-sm">
+
+                        <img th:src="@{/images/classProvide/1.webp}"
+                             class="img-fluid w-100"
+                             alt="Body Building">
+
+                        <!-- Vertical Title -->
+                        <div class="vertical-text">
+                            BODY BUILDING CLASS
+                        </div>
+
+                        <!-- Bottom Duration -->
+                        <div class="duration">
+                            Duration 50 Minutes
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Fitness -->
+                <div class="col-lg-4 col-md-6">
+                    <div data-aos="zoom-in-up" data-aos-delay="100" class="class-card position-relative overflow-hidden shadow-sm">
+
+                        <img th:src="@{/images/classProvide/2.webp}"
+                             class="img-fluid w-100"
+                             alt="Fitness">
+
+                        <div class="vertical-text">
+                            FITNESS CLASS
+                        </div>
+
+                        <div class="duration">
+                            Duration 45 Minutes
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Crossfit -->
+                <div class="col-lg-4 col-md-6">
+                    <div data-aos="zoom-in-up" data-aos-delay="100" class="class-card position-relative overflow-hidden shadow-sm">
+
+                        <img th:src="@{/images/classProvide/3.webp}"
+                             class="img-fluid w-100"
+                             alt="Crossfit">
+
+                        <div class="vertical-text">
+                            CROSSFIT CLASS
+                        </div>
+
+                        <div class="duration">
+                            Duration 35 Minutes
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Yoga -->
+                <div class="col-lg-4 col-md-6">
+                    <div data-aos="zoom-in-up" data-aos-delay="100" class="class-card position-relative overflow-hidden shadow-sm">
+
+                        <img th:src="@{/images/classProvide/4.webp}"
+                             class="img-fluid w-100"
+                             alt="Yoga">
+
+                        <div class="vertical-text">
+                            YOGA CLASS
+                        </div>
+
+                        <div class="duration">
+                            Duration 25 Minutes
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Martial Art -->
+                <div class="col-lg-4 col-md-6">
+                    <div data-aos="zoom-in-up" data-aos-delay="100" class="class-card position-relative overflow-hidden shadow-sm">
+
+                        <img th:src="@{/images/classProvide/5.webp}"
+                             class="img-fluid w-100"
+                             alt="Martial Art">
+
+                        <div class="vertical-text">
+                            MARTIAL ART CLASS
+                        </div>
+
+                        <div class="duration">
+                            Duration 30 Minutes
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Cardio -->
+                <div class="col-lg-4 col-md-6">
+                    <div data-aos="zoom-in-up" data-aos-delay="100" class="class-card position-relative overflow-hidden shadow-sm">
+
+                        <img th:src="@{/images/classProvide/6.webp}"
+                             class="img-fluid w-100"
+                             alt="Cardio">
+
+                        <div class="vertical-text">
+                            CARDIO CLASS
+                        </div>
+
+                        <div class="duration">
+                            Duration 40 Minutes
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+<!--====================================== Price plan ==============================================-->
+    <section class="membership-section">
+        <div class="container">
+
+            <!-- Section Title -->
+            <div class="text-center mb-5">
+                <h2 class="membership-title">
+                    CHOOSE YOUR <span>MEMBERSHIP</span>
+                </h2>
+                <p class="membership-subtitle">
+                    Gym classes dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua minim niam
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-4 col-md-6" th:each="m : ${memberships}" data-aos="fade-up"
+                     data-aos-delay="100">
+
+                    <div class="membership-card d-flex flex-column">
+
+                        <!-- Membership Name -->
+                        <h6 class="text-center mb-3" th:text="${m.name}"></h6>
+
+                        <!-- Price -->
+                        <h3 class="price text-center mb-2" th:text="${m.price + ' ৳'}"></h3>
+
+                        <!-- Duration -->
+                        <p class="per-month text-center mb-3" th:text="${m.durationInDays + ' days'}"></p>
+
+                        <!-- Features -->
+                        <ul class="flex-grow-1">
+                            <li th:each="f : ${m.features}" th:text="${f.featureName}"></li>
+                        </ul>
+
+                        <!-- Button -->
+                        <div class="mt-auto text-center">
+                            <a th:href="@{/memberships}" class="btn btn-dark">
+                                JOIN TODAY
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- View More -->
+            <div class="text-center mt-4">
+                <a th:href="@{/memberships}" style="color: #00C6A7;border: 2px solid #00C6A7;" id="" class="price-btn btn btn-outline-dark">
+                    View All Plans
+                </a>
+            </div>
+        </div>
+    </section>
+<!--=====================================trainer profile================================================-->
+    <section class="trainer-section py-5 bg-light">
+        <div class="container">
+
+            <!-- Title -->
+            <div class="text-center mb-5">
+                <h2 class="membership-title">
+                    PROFESSIONAL <span>INSTRUCTORS</span>
+                </h2>
+                <p class="text-muted">
+                    Gym classes dolor sit amet, consectetur adipiscing elit.
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-3 col-md-6" th:each="trainer : ${trainers}">
+                    <div class="trainer-card" data-aos="flip-left">
+
+                        <div class="trainer-img">
+                            <a th:href="@{'/trainers/' + ${trainer.trainerId}}">
+                                <img th:src="${trainer.user.profileImage != null}
+                      ? '/uploads/profile/' + ${trainer.user.profileImage}
+                      : '/images/default.webp'"
+                                     alt="Trainer">
+                            </a>
+                        </div>
+
+                        <div class="trainer-info text-center">
+                            <h5 th:text="${trainer.user.firstName + ' ' + trainer.user.lastName}"></h5>
+                            <p th:text="${trainer.specialization}"></p>
+
+                            <div class="social-icons">
+                                <i class="ri-facebook-fill"></i>
+                                <i class="ri-phone-fill"></i>
+                                <i class="ri-instagram-line"></i>
+                                <i class="ri-twitter-fill"></i>
+                            </div>
+
+                            <!-- 🔥 Button -->
+                            <a th:href="@{'/trainers/' + ${trainer.trainerId}}"
+                               class="view-profile">
+                                VIEW PROFILE
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--=====================================latest blog================================================-->
+    <section class="blog-section py-5">
+
+        <div class="container">
+
+            <!-- Title -->
+            <div class="text-center mb-5">
+
+                <h2 class="membership-title">
+                    LATEST <span >BLOG POST</span>
+                </h2>
+
+                <p class="text-muted col-lg-6 mx-auto">
+                    Gym classes dolor sit amet, consectetur adipisicing elit, sed do
+                    eiod tempor didunt ut labore et dolore magna aliqua minim niam
+                </p>
+
+            </div>
+
+            <!-- Blog Cards -->
+            <div class="row g-4">
+
+                <div class="col-lg-4 col-md-6"
+                     th:each="blog : ${blogs}">
+
+                    <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+
+                        <!-- Image -->
+                        <div class="blog-img-wrapper">
+                            <a th:href="@{/blog/{id}(id=${blog.id})}">
+                                <img th:src="${blog.coverImage != null}
+                                      ? @{/uploads/blog/{img}(img=${blog.coverImage})}
+                                      : (${blog.images.size() > 0}
+                                          ? @{/uploads/blog/{img}(img=${blog.images[0].imageUrl})}
+                                          : @{/images/default-blog.jpg})"
+                                     class="img-fluid blog-img">
+                            </a>
+                        </div>
+
+
+                        <div class="blog-content">
+
+                            <!-- Meta -->
+                            <div class="blog-meta">
+
+                            <span class="blog-tag">
+                                <i class="ri-price-tag-3-line"></i>
+                                <span th:text="${blog.getCategory()}"></span>
+                            </span>
+
+                                <span class="blog-date">
+                                <i class="ri-calendar-line"></i>
+                                <span th:text="${#temporals.format(blog.createdAt,'dd MMM yyyy')}"></span>
+                            </span>
+
+                            </div>
+
+                            <!-- Title -->
+                            <h5 class="blog-title">
+
+                                <a th:href="@{/blog/{id}(id=${blog.id})}"
+                                   style="text-decoration:none;color:inherit;"
+                                   th:text="${blog.title}">
+                                </a>
+
+                            </h5>
+
+                            <!-- Content Preview -->
+<!--                            <p class="blog-text"-->
+<!--                               th:text="${#strings.abbreviate(blog.content,120)}">-->
+<!--                            </p>-->
+                            <p class="blog-text"
+                               th:utext="${blog.content.length() > 120 ? blog.content.substring(0,120) + '...' : blog.content}">
+                            </p> 
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+<!--    Bmi Section -->
+    <div th:replace="fragments/bmi-calculator :: bmi-calculator" ></div>
+    <!--Footer-->
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out',
+            offset: 100
+        });
+    </script>
+    <script th:src="@{/js/navbar.js}"></script>
+    <script th:src="@{/js/hero.js}"></script>
+    <script th:src="@{/js/bmi-calculator.js}"></script>
+    <script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

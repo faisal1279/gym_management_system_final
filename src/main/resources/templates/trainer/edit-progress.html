@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/member-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+    <title>Update Progress</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/trainer-sideber :: trainerSidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container mt-4">
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h4 class="mb-3">Update Member Progress</h4>
+
+                    <form th:action="@{'/trainer/progress/' + ${progress.id} + '/update'}" method="post">
+
+                        <!-- Hidden memberId -->
+                        <input type="hidden" name="memberId" th:value="${memberId}">
+
+                        <!-- Weight -->
+                        <div class="mb-3">
+                            <label class="form-label">Weight (kg)</label>
+                            <input type="number"
+                                   step="0.1"
+                                   name="weight"
+                                   th:value="${progress.weight}"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <!-- Body Fat -->
+                        <div class="mb-3">
+                            <label class="form-label">Body Fat (%)</label>
+                            <input type="number"
+                                   step="0.1"
+                                   name="bodyFat"
+                                   th:value="${progress.bodyFat}"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <textarea name="notes"
+                                      class="form-control"
+                                      rows="3"
+                                      placeholder="Add progress notes...">[[${progress.notes}]]</textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">
+                                <i class="ri-edit-line me-1"></i>
+                                Update Progress
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

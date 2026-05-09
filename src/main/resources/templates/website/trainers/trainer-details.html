@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Contact</title>
+    <style>
+        .trainer-section{
+            padding:80px 0;
+            background:#f8f9fa;
+        }
+
+        /* CARD */
+        .trainer-card{
+            background:#fff;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .trainer-img{
+            width:100%;
+            border-radius:10px;
+        }
+
+        /* NAME */
+        .trainer-name{
+            font-weight:800;
+            font-size:22px;
+            margin-top:10px;
+        }
+
+        .trainer-role{
+            color:#888;
+            font-size:14px;
+        }
+
+        /* CONTACT */
+        .trainer-contact p{
+            font-size:14px;
+            margin-bottom:6px;
+            color:#555;
+        }
+
+        /* SECTION TITLE */
+        .section-title{
+            font-weight:700;
+            margin-bottom:10px;
+        }
+
+        /* INFO BOX */
+        .info-box{
+            background:#fff;
+            padding:15px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.04);
+        }
+
+        .info-box span{
+            font-size:13px;
+            color:#888;
+        }
+
+        .info-box h6{
+            margin:0;
+            font-weight:700;
+        }
+
+        /* ACHIEVEMENT */
+        .achievement-list{
+            list-style:none;
+            padding:0;
+        }
+
+        .achievement-list li{
+            margin-bottom:8px;
+            padding-left:18px;
+            position:relative;
+        }
+
+        .achievement-list li::before{
+            content:'●';
+            position:absolute;
+            left:0;
+            color:#f1c40f;
+        }
+
+        /* SKILL */
+        .skill{
+            margin-bottom:15px;
+        }
+
+        .skill p{
+            display:flex;
+            justify-content:space-between;
+            font-weight:600;
+        }
+
+        .skill-bar{
+            height:6px;
+            background:#eee;
+            border-radius:10px;
+            overflow:hidden;
+        }
+
+        .skill-bar div{
+            height:100%;
+            background:#f1c40f;
+            transition:0.5s;
+        }
+
+        /* RATING */
+        .rating{
+            font-size:22px;
+        }
+
+        .filled-star{
+            color:#f1c40f;
+        }
+
+        .empty-star{
+            color:#ddd;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:768px){
+
+            .trainer-card{
+                text-align:center;
+            }
+
+            .info-box{
+                margin-bottom:10px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Our Trainers',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="trainer-section" th:if="${trainer != null}">
+    <div class="container">
+
+        <div class="row g-5">
+
+            <!-- 🔥 LEFT PROFILE CARD -->
+            <div class="col-lg-4">
+
+                <div class="trainer-card text-center">
+
+                    <img class="trainer-img mb-3"
+                         th:src="${trainer.user.profileImage != null}
+      ? '/uploads/profile/' + ${trainer.user.profileImage}
+      : '/images/default.webp'">
+
+                    <h5 class="trainer-name"
+                        th:text="${trainer.user.firstName + ' ' + trainer.user.lastName}">
+                    </h5>
+
+                    <p class="trainer-role"
+                       th:text="${trainer.specialization}">
+                    </p>
+
+                    <!-- Status -->
+                    <div class="mb-2">
+                        <span th:if="${trainer.active}" class="badge bg-success">Active</span>
+                        <span th:if="${!trainer.active}" class="badge bg-danger">Inactive</span>
+                    </div>
+
+                    <hr>
+
+                    <!-- Contact -->
+                    <div class="trainer-contact">
+
+                        <p><i class="ri-mail-line"></i>
+                            <span th:text="${trainer.user.email}"></span></p>
+
+                        <p><i class="ri-phone-line"></i>
+                            <span th:text="${trainer.user.phone}"></span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- 🔥 RIGHT MAIN CONTENT -->
+            <div class="col-lg-8">
+
+                <!-- BIO -->
+                <div class="mb-4">
+                    <h5 class="section-title">Biography</h5>
+                    <p class="text-muted"
+                       th:text="${trainer.bio}">
+                    </p>
+                </div>
+
+                <!-- INFO GRID -->
+                <div class="row mb-4">
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span>Experience</span>
+                            <h6 th:text="${trainer.experienceYears + ' Years'}"></h6>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="info-box">
+                            <span>Specialization</span>
+                            <h6 th:text="${trainer.specialization}"></h6>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ACHIEVEMENTS -->
+                <div class="mb-4">
+                    <h5 class="section-title">Achievements</h5>
+
+                    <ul class="achievement-list">
+                        <li th:each="ach : ${trainer.achievements}"
+                            th:text="${ach.title}"></li>
+                    </ul>
+
+                </div>
+
+                <!-- SKILLS -->
+                <div class="mb-4">
+                    <h5 class="section-title">Skills</h5>
+
+                    <div th:each="skill : ${trainer.skills}" class="skill">
+
+                        <p>
+                            <span th:text="${skill.skillName}"></span>
+                            <span th:text="${skill.percentage + '%'}"></span>
+                        </p>
+
+                        <div class="skill-bar">
+                            <div th:style="'width:' + ${skill.percentage} + '%'"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RATING -->
+                <div class="mb-3">
+                    <h5 class="section-title">Rating</h5>
+
+                    <div class="rating">
+
+<span th:each="i : ${#numbers.sequence(1,5)}"
+      th:classappend="${i <= trainer.rating} ? ' filled-star' : ' empty-star'">
+★
+</span>
+
+                        <span class="text-muted ms-2"
+                              th:text="'(' + ${trainer.totalReviews} + ' Reviews)'">
+</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

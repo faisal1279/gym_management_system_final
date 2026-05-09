@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+
+
+    <title>Admin Dashboard</title>
+    <style>
+        /* Feature badges */
+        .feature-list{
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+        }
+
+        .feature-badge{
+            background:#f1f1f1;
+            padding:4px 10px;
+            border-radius:20px;
+            font-size:12px;
+        }
+
+        .feature-more{
+            font-size:12px;
+            color:#666;
+        }
+
+        /* Desktop hide mobile */
+        @media(min-width:768px){
+            .d-md-none{display:none;}
+        }
+
+        /* Mobile hide table */
+        @media(max-width:767px){
+            .table-responsive{display:none;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div th:if="${success}" class="alert alert-success">
+                <span th:text="${success}"></span>
+            </div>
+
+            <div th:if="${error}" class="alert alert-danger">
+                <span th:text="${error}"></span>
+            </div>
+
+<!--            <div class="container mt-4">-->
+
+<!--                &lt;!&ndash; Page Title &ndash;&gt;-->
+<!--                <h4 class="mb-4">Membership Packages</h4>-->
+
+<!--                &lt;!&ndash; Create Membership &ndash;&gt;-->
+<!--                <div class="card shadow-sm border-0 mb-4">-->
+<!--                    <div class="card-body p-4">-->
+
+<!--                        <h5 class="mb-3">Create New Package</h5>-->
+
+<!--                        <form method="post"-->
+<!--                              th:action="@{/admin/memberships}"-->
+<!--                              class="row g-3">-->
+
+<!--                            <div class="col-md-4">-->
+<!--                                <label class="form-label">Name</label>-->
+<!--                                <input type="text"-->
+<!--                                       name="name"-->
+<!--                                       class="form-control"-->
+<!--                                       placeholder="Package name"-->
+<!--                                       required>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-md-4">-->
+<!--                                <label class="form-label">Duration (Days)</label>-->
+<!--                                <input type="number"-->
+<!--                                       name="duration"-->
+<!--                                       class="form-control"-->
+<!--                                       min="1"-->
+<!--                                       placeholder="e.g. 30"-->
+<!--                                       required>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-md-4">-->
+<!--                                <label class="form-label">Price</label>-->
+<!--                                <input type="number"-->
+<!--                                       name="price"-->
+<!--                                       class="form-control"-->
+<!--                                       min="0"-->
+<!--                                       placeholder="e.g. 3000"-->
+<!--                                       required>-->
+<!--                            </div>-->
+
+<!--                            <div class="col-12 text-end">-->
+<!--                                <button class="btn btn-primary">-->
+<!--                                    Create Package-->
+<!--                                </button>-->
+<!--                            </div>-->
+
+<!--                        </form>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Membership List &ndash;&gt;-->
+<!--                <div class="card shadow-sm border-0">-->
+<!--                    <div class="card-body p-4">-->
+
+<!--                        <h5 class="mb-3">All Packages</h5>-->
+
+<!--                        <div class="table-responsive">-->
+<!--                            <table class="table table-hover align-middle">-->
+<!--                                <thead class="table-dark">-->
+<!--                                <tr>-->
+<!--                                    <th>Name</th>-->
+<!--                                    <th>Duration</th>-->
+<!--                                    <th>Price</th>-->
+<!--                                    <th>Status</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+
+<!--                                <tbody>-->
+<!--                                <tr th:each="m : ${memberships}">-->
+<!--                                    <td th:text="${m.name}"></td>-->
+
+<!--                                    <td th:text="${m.durationInDays + ' days'}"></td>-->
+
+<!--                                    <td th:text="${m.price + ' ৳'}"></td>-->
+
+<!--                                    <td>-->
+<!--                            <span th:if="${m.active}"-->
+<!--                                  class="badge bg-success">Active</span>-->
+<!--                                        <span th:if="${!m.active}"-->
+<!--                                              class="badge bg-secondary">Inactive</span>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+            <div class="container mt-4">
+
+                <!-- Page Title -->
+                <h4 class="mb-4">Membership Packages</h4>
+
+                <!-- Create Membership -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body p-4">
+
+                        <h5 class="mb-3">Create New Package</h5>
+
+                        <form method="post"
+                              th:action="@{/admin/memberships}"
+                              class="row g-3">
+
+                            <div class="col-md-4">
+                                <label class="form-label">Name</label>
+                                <input type="text" name="name"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Duration (Days)</label>
+                                <input type="number" name="duration"
+                                       class="form-control"
+                                       min="1" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Price</label>
+                                <input type="number" name="price"
+                                       class="form-control"
+                                       min="0" required>
+                            </div>
+
+                            <!-- 🔥 Features -->
+                            <div class="col-12">
+                                <label class="form-label">Features</label>
+
+                                <div id="featureContainer">
+                                    <input type="text" name="features" class="form-control mb-2" placeholder="Feature 1">
+                                </div>
+
+                                <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        onclick="addFeature()">+ Add Feature</button>
+                            </div>
+
+                            <div class="col-12 text-end">
+                                <button class="btn btn-primary">
+                                    Create Package
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <!-- Membership List -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+
+                        <h5 class="mb-3">All Packages</h5>
+
+<!--                        Desktop-->
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+
+                                <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Features</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each="m : ${memberships}">
+
+                                    <td th:text="${m.name}"></td>
+
+                                    <td th:text="${m.durationInDays + ' days'}"></td>
+
+                                    <td th:text="${m.price + ' ৳'}"></td>
+
+                                    <!-- 🔥 Features show -->
+<!--                                    <td>-->
+<!--                                        <ul class="mb-0 ps-3">-->
+<!--                                            <li th:each="f : ${m.features}"-->
+<!--                                                th:text="${f.featureName}"></li>-->
+<!--                                        </ul>-->
+<!--                                    </td>-->
+                                    <td>
+                                                <div class="feature-list">
+
+                                                    <!-- show first 2 -->
+                                                    <span th:each="f,stat : ${m.features}"
+                                                          th:if="${stat.index < 2}"
+                                                          class="feature-badge"
+                                                          th:text="${f.featureName}">
+                                                     </span>
+
+                                                    <!-- more count -->
+                                                    <span th:if="${m.features.size() > 2}"
+                                                          class="feature-more"
+                                                          th:text="'+' + (${m.features.size()} - 2) + ' more'">
+                                                    </span>
+
+                                                </div>
+                                    </td>
+
+                                    <!-- Status -->
+                                    <td>
+                                        <span th:if="${m.active}" class="badge bg-success">Active</span>
+                                        <span th:if="${!m.active}" class="badge bg-secondary">Inactive</span>
+                                    </td>
+
+                                    <!-- 🔥 Actions -->
+                                    <td>
+
+                                        <button class="btn btn-sm btn-warning"
+                                                data-bs-toggle="modal"
+                                                th:attr="data-bs-target='#editModal-' + ${m.membershipId}">
+                                            Edit
+                                        </button>
+
+                                        <!-- Delete -->
+                                        <a th:href="@{/admin/memberships/delete/{id}(id=${m.membershipId})}"
+                                           class="btn btn-sm btn-danger"
+                                           onclick="return confirm('Are you sure?')">
+                                            Delete
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- MOBILE -->
+                        <div class="d-md-none">
+
+                            <div th:each="m : ${memberships}"
+                                 class="card mb-3 shadow-sm border-0">
+
+                                <div class="card-body">
+
+                                    <h6 class="fw-bold mb-2"
+                                        th:text="${m.name}"></h6>
+
+                                    <div class="row mb-2">
+
+                                        <div class="col-6">
+                                            <small class="text-muted">Duration</small><br>
+                                            <span th:text="${m.durationInDays + ' days'}"></span>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <small class="text-muted">Price</small><br>
+                                            <span th:text="${m.price + ' ৳'}"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Features -->
+                                    <div class="mb-2">
+
+                                        <small class="text-muted">Features</small><br>
+
+                                        <div class="feature-list">
+
+                    <span th:each="f,stat : ${m.features}"
+                          th:if="${stat.index < 3}"
+                          class="feature-badge"
+                          th:text="${f.featureName}">
+                    </span>
+
+                                            <span th:if="${m.features.size() > 3}"
+                                                  class="feature-more"
+                                                  th:text="'+' + (${m.features.size()} - 3) + ' more'">
+                    </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Status -->
+                                    <div class="mb-2">
+                                        <span th:if="${m.active}" class="badge bg-success">Active</span>
+                                        <span th:if="${!m.active}" class="badge bg-secondary">Inactive</span>
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div class="d-flex gap-2">
+
+                                        <button class="btn btn-sm btn-warning w-50"
+                                                data-bs-toggle="modal"
+                                                th:attr="data-bs-target='#editModal-' + ${m.membershipId}">
+                                            Edit
+                                        </button>
+
+                                        <a th:href="@{/admin/memberships/delete/{id}(id=${m.membershipId})}"
+                                           class="btn btn-sm btn-danger w-50">
+                                            Delete
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div th:each="m : ${memberships}">
+
+                            <div class="modal fade"
+                                 th:id="'editModal-' + ${m.membershipId}"
+                                 tabindex="-1">
+
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <form method="post"
+                                              th:action="@{/admin/memberships/update/{id}(id=${m.membershipId})}">
+
+                                            <div class="modal-header">
+                                                <h5>Edit Package</h5>
+                                                <button type="button" class="btn-close"
+                                                        data-bs-dismiss="modal"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+
+                                                <input type="text" name="name"
+                                                       th:value="${m.name}"
+                                                       class="form-control mb-2">
+
+                                                <input type="number" name="duration"
+                                                       th:value="${m.durationInDays}"
+                                                       class="form-control mb-2">
+
+                                                <input type="number" name="price"
+                                                       th:value="${m.price}"
+                                                       class="form-control mb-2">
+
+                                                <!-- 🔥 Features -->
+                                                <label class="form-label mt-3">Features</label>
+
+                                                <div th:id="'editFeatureContainer-' + ${m.membershipId}">
+
+                                                    <!-- existing features -->
+                                                    <div th:each="f : ${m.features}" class="d-flex mb-2">
+                                                        <input type="text" name="features"
+                                                               th:value="${f.featureName}"
+                                                               class="form-control me-2">
+
+                                                        <!-- remove button -->
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="removeFeature(this)">✖</button>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- add button -->
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-secondary mt-2"
+                                                        th:attr="onclick='addEditFeature(' + '\'' + ${m.membershipId} + '\'' + ')'">
+                                                    + Add Feature
+                                                </button>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary">Update</button>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+    function addFeature() {
+        let input = document.createElement("input");
+        input.type = "text";
+        input.name = "features";
+        input.className = "form-control mb-2";
+        document.getElementById("featureContainer").appendChild(input);
+    }
+
+    function addEditFeature(id) {
+
+        let container = document.getElementById("editFeatureContainer-" + id);
+
+        let div = document.createElement("div");
+        div.className = "d-flex mb-2";
+
+        div.innerHTML = `
+            <input type="text" name="features" class="form-control me-2">
+            <button type="button" class="btn btn-danger btn-sm"
+                    onclick="removeFeature(this)">✖</button>
+        `;
+
+        container.appendChild(div);
+    }
+
+    function removeFeature(btn) {
+        btn.parentElement.remove();
+    }
+</script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/class-provide.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>memberships</title>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Memberships',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="membership-section">
+    <div class="container">
+
+        <!-- Section Title -->
+        <div class="text-center mb-5">
+            <h2 class="membership-title">
+                CHOOSE YOUR <span>MEMBERSHIP</span>
+            </h2>
+            <p class="membership-subtitle">
+                Gym classes dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua minim niam
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6" th:each="m : ${memberships}">
+
+                <div class="membership-card d-flex flex-column">
+
+                    <!-- Membership Name -->
+                    <h6 class="text-center mb-3" th:text="${m.name}"></h6>
+
+                    <!-- Price -->
+                    <h3 class="price text-center mb-2" th:text="${m.price + ' ৳'}"></h3>
+
+                    <!-- Duration -->
+                    <p class="per-month text-center mb-3" th:text="${m.durationInDays + ' days'}"></p>
+
+                    <!-- Features -->
+                    <ul class="flex-grow-1">
+                        <li th:each="f : ${m.features}" th:text="${f.featureName}"></li>
+                    </ul>
+
+                    <!-- Button -->
+<!--                    <div class="mt-auto text-center">-->
+<!--                        <a th:href="@{/memberships}" class="btn btn-dark">-->
+<!--                            JOIN TODAY-->
+<!--                        </a>-->
+<!--                    </div>-->
+
+                    <div class="mt-auto text-center">
+
+<!--                        &lt;!&ndash; Guest User &ndash;&gt;-->
+<!--                        <a th:if="${!#authorization.expression('isAuthenticated()')}"-->
+<!--                           th:href="@{/login}"-->
+<!--                           class="btn btn-dark">-->
+
+<!--                            Login To Purchase-->
+
+<!--                        </a>-->
+
+<!--                        &lt;!&ndash; Normal USER &ndash;&gt;-->
+<!--                        <a th:if="${#authorization.expression('hasRole(''USER'')')}"-->
+<!--                           th:href="@{/profile}"-->
+<!--                           class="btn btn-warning">-->
+
+<!--                            Complete Membership-->
+
+<!--                        </a>-->
+
+<!--                        &lt;!&ndash; MEMBER &ndash;&gt;-->
+<!--                        <form th:if="${#authorization.expression('hasRole(''MEMBER'')')}"-->
+<!--                              th:action="@{/member/payment/{id}(id=${m.membershipId})}"-->
+<!--                              method="post">-->
+
+<!--                            <button type="submit"-->
+<!--                                    class="btn btn-success">-->
+
+<!--                                Pay Online-->
+
+<!--                            </button>-->
+
+<!--                        </form>-->
+
+<!--                        <form th:if="${#authorization.expression('hasAnyRole(''USER'',''MEMBER'')')}"-->
+<!--                              th:action="@{/member/payment/{id}(id=${m.membershipId})}"-->
+<!--                              method="post">-->
+
+<!--                            <button type="submit"-->
+<!--                                    class="btn btn-success">-->
+
+<!--                                Pay Online-->
+
+<!--                            </button>-->
+
+<!--                        </form>-->
+                        <form th:if="${#authorization.expression('isAuthenticated()')}"
+                              th:action="@{/member/payment/{membershipId}(membershipId=${m.membershipId})}"
+                              method="post">
+
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}">
+
+                            <button type="submit"
+                                    class="btn btn-success">
+
+                                Pay Online
+
+                            </button>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

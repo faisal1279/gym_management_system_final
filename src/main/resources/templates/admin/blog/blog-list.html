@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+
+
+
+    <title>Blog List</title>
+    <style>
+        /* ===== MOBILE TABLE SCROLL FIX ===== */
+        .blog-table-wrapper{
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* prevent table shrink */
+        .blog-table-wrapper table{
+            min-width: 650px; /* 🔥 key line */
+        }
+
+        /* smooth scroll feel */
+        .blog-table-wrapper::-webkit-scrollbar{
+            height: 6px;
+        }
+        .blog-table-wrapper::-webkit-scrollbar-thumb{
+            background: #ccc;
+            border-radius: 10px;
+        }
+        .blog-table-wrapper img{
+            width: 60px;
+            height: 45px;
+            object-fit: cover;
+        }
+        .table td .btn{
+            padding: 6px 8px;
+        }
+        .blog-table-wrapper::after{
+            content: "← scroll →";
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        @media(min-width:768px){
+            .blog-table-wrapper::after{
+                display:none;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+
+            <div class="container py-4">
+
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <h2 class="fw-bold">
+                        <i class="ri-article-line me-2"></i>
+                        Blog Management
+                    </h2>
+
+                    <a th:href="@{/admin/blog/create}"
+                       class="btn btn-primary">
+
+                        <i class="ri-add-line"></i>
+                        Create Blog
+
+                    </a>
+
+                </div>
+
+
+                <!-- ================= ADMIN BLOG SEARCH ================= -->
+                <div class="blog-search-bar mb-4">
+
+                    <form method="get" th:action="@{/admin/blogs}">
+                        <div class="row align-items-center g-2">
+
+                            <!-- 🔍 Search -->
+                            <div class="col-md-5">
+                                <input type="text"
+                                       name="keyword"
+                                       class="form-control search-input"
+                                       placeholder="Search blogs..."
+                                       th:value="${keyword}">
+                            </div>
+
+                            <!-- 📂 Category Filter -->
+                            <div class="col-md-3">
+                                <select name="category" class="form-select search-select">
+
+                                    <option value="">All Categories</option>
+
+                                    <option th:each="cat : ${categories}"
+                                            th:value="${cat}"
+                                            th:text="${cat}"
+                                            th:selected="${cat == category}">
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <!-- 📌 Published Filter -->
+                            <div class="col-md-3">
+                                <select name="published" class="form-select search-select">
+
+                                    <option value="">All Status</option>
+
+                                    <option value="true"
+                                            th:selected="${published == true}">
+                                        Published
+                                    </option>
+
+                                    <option value="false"
+                                            th:selected="${published == false}">
+                                        Unpublished
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <!-- 🔎 Button -->
+                            <div class="col-md-1">
+                                <button type="submit" class="btn-in w-100">
+                                    <i class="ri-search-line"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Blog Table -->
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-0">
+
+                        <div class="table-responsive blog-table-wrapper">
+
+                            <table class="table table-hover align-middle mb-0">
+
+                            <thead class="table-dark">
+
+                            <tr>
+
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            <tr th:each="blog : ${blogs}">
+
+                                <!-- Image -->
+                                <td>
+
+                                    <img th:if="${blog.images.size() > 0}"
+                                         th:src="@{'/uploads/blog/' + ${blog.images[0].imageUrl}}"
+                                         width="70"
+                                         class="rounded shadow-sm">
+
+                                </td>
+
+                                <!-- Title -->
+                                <td class="fw-semibold"
+                                    th:text="${blog.title}">
+                                </td>
+
+                                <!-- Category -->
+                                <td>
+
+                        <span class="badge bg-secondary"
+                              th:text="${blog.category}">
+                        </span>
+
+                                </td>
+
+                                <!-- Date -->
+                                <td th:text="${#temporals.format(blog.createdAt,'dd MMM yyyy')}"></td>
+
+                                <!-- Actions -->
+                                <td>
+
+                                    <a th:href="@{/admin/blog/view/{id}(id=${blog.id})}"
+                                       class="btn btn-sm btn-outline-primary">
+
+                                        <i class="ri-eye-line"></i>
+
+                                    </a>
+
+                                    <a th:href="@{/admin/blog/edit/{id}(id=${blog.id})}"
+                                       class="btn btn-sm btn-outline-warning">
+
+                                        <i class="ri-edit-line"></i>
+
+                                    </a>
+
+                                    <a th:href="@{/admin/blog/delete/{id}(id=${blog.id})}"
+                                       onclick="return confirm('Delete this blog?')"
+                                       class="btn btn-sm btn-outline-danger">
+
+                                        <i class="ri-delete-bin-line"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            <tr th:if="${blogs.size() == 0}">
+                                <td colspan="5" class="text-center py-5 text-muted">
+                                    <i class="ri-user-search-line fs-2"></i>
+                                    <div>No Blog found</div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                        <!--                pagination section-->
+                        <div th:if="${totalPages > 1}">
+                            <div th:replace="fragments/pagination :: pagination('/admin/blogs', ${currentPage}, ${totalPages})"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+                </div>
+
+            </div>
+            </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

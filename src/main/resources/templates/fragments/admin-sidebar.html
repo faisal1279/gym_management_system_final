@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<body>
+<aside th:fragment="sidebar" class="sidebar">
+
+    <h2 class="sidebar-title">Gym Admin</h2>
+
+    <ul>
+
+        <li><a th:href="@{/admin/dashboard}"><i class="ri-dashboard-line"></i><span>Dashboard</span></a></li>
+
+        <li><a th:href="@{/admin/users}"><i class="ri-group-line"></i><span>Users</span></a></li>
+
+        <li><a th:href="@{/admin/trainers}"><i class="ri-user-star-line"></i><span>Trainers</span></a></li>
+
+        <li><a th:href="@{/admin/blogs}"><i class="ri-article-line"></i><span>Blogs</span></a></li>
+
+        <li><a th:href="@{/admin/classes}"><i class="ri-calendar-line"></i><span>Classes</span></a></li>
+
+        <li><a th:href="@{/admin/gallery}"><i class="ri-image-line"></i><span>Gallery</span></a></li>
+
+        <li><a th:href="@{/admin/members}"><i class="ri-user-line"></i><span>Members</span></a></li>
+
+        <li><a th:href="@{/admin/memberships}"><i class="ri-vip-crown-line"></i><span>Memberships</span></a></li>
+
+        <li><a th:href="@{/admin/attendance}"><i class="ri-calendar-check-line"></i><span>Attendance</span></a></li>
+
+        <li><a th:href="@{/admin/exercise}"><i class="ri-dumbbell-line"></i><span>Exercises</span></a></li>
+
+        <li><a th:href="@{/admin/payments}"><i class="ri-bank-card-line"></i><span>Payments</span></a></li>
+
+        <li><a th:href="@{/profile}"><i class="ri-user-settings-line"></i><span>Profile</span></a></li>
+
+        <li><a href="#"><i class="ri-bar-chart-line"></i><span>Reports</span></a></li>
+    </ul>
+
+</aside>
+</body>
+</html>

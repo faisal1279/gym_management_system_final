@@ -1,0 +1,76 @@
+<div th:fragment="pagination(baseUrl, currentPage, totalPages)"
+     class="text-center mt-4">
+
+    <!-- Page Info -->
+    <div class="text-muted small mb-2">
+        Page <b th:text="${currentPage + 1}"></b> of
+        <b th:text="${totalPages}"></b>
+    </div>
+
+    <nav id="pag_wrapper" class="d-flex justify-content-center">
+        <ul class="pagination custom-pagination mb-0">
+
+            <!-- 🔹 First -->
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{${baseUrl}(page=0)}">
+                    « First
+                </a>
+            </li>
+
+            <!-- 🔹 Prev -->
+            <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{${baseUrl}(page=${currentPage - 1})}">
+                    ‹
+                </a>
+            </li>
+
+            <!-- 🔹 Left Ellipsis -->
+            <li class="page-item disabled"
+                th:if="${currentPage > 2}">
+                <span class="page-link">...</span>
+            </li>
+
+            <!-- 🔹 Page Numbers (Dynamic Window) -->
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(
+                    currentPage > 2 ? currentPage - 2 : 0,
+                    currentPage + 2 < totalPages ? currentPage + 2 : totalPages - 1)}"
+                th:classappend="${i == currentPage} ? 'active'">
+
+                <a class="page-link"
+                   th:href="@{${baseUrl}(page=${i})}"
+                   th:text="${i + 1}">
+                </a>
+            </li>
+
+            <!-- 🔹 Right Ellipsis -->
+            <li class="page-item disabled"
+                th:if="${currentPage < totalPages - 3}">
+                <span class="page-link">...</span>
+            </li>
+
+            <!-- 🔹 Next -->
+            <li class="page-item"
+                th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+
+                <a class="page-link"
+                   th:href="@{${baseUrl}(page=${currentPage + 1})}">
+                    ›
+                </a>
+            </li>
+
+            <!-- 🔹 Last -->
+            <li class="page-item"
+                th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+
+                <a class="page-link"
+                   th:href="@{${baseUrl}(page=${totalPages - 1})}">
+                    Last »
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+</div>

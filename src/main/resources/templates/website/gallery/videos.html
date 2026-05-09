@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/common-hero-section.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+
+    <title>Videos</title>
+    <style>
+        /* SECTION */
+        .video-section{
+            background:#f9fafb;
+        }
+
+        /* TITLE */
+        .video-title{
+            font-size:32px;
+            font-weight:900;
+        }
+
+        .video-title span{
+            color:var(--teal);
+        }
+
+        /* CARD */
+        .video-card{
+            background:#fff;
+            border-radius:12px;
+            overflow:hidden;
+            box-shadow:0 10px 25px rgba(0,0,0,0.05);
+            transition:0.3s;
+        }
+
+        /* HOVER */
+        .video-card:hover{
+            transform:translateY(-5px);
+            box-shadow:0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* VIDEO */
+        .video-wrapper{
+            position:relative;
+            width:100%;
+            padding-top:56.25%; /* 16:9 */
+            overflow:hidden;
+        }
+
+        .video-wrapper iframe{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            border:none;
+        }
+
+        /* CONTENT */
+        .video-content{
+            padding:15px;
+        }
+
+        .video-content h6{
+            font-weight:700;
+            margin-bottom:5px;
+        }
+
+        .video-content p{
+            font-size:13px;
+            color:#777;
+        }
+
+        /* MOBILE */
+        @media(max-width:768px){
+
+            .video-title{
+                font-size:24px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!-- Hero -->
+<div th:replace="~{fragments/hero-section :: hero(
+        'Videos',
+        'Feel free to reach out for membership and training inquiries.',
+        @{/images/hero/bg-page2.webp}
+)}"></div>
+
+<section class="video-section py-5">
+
+    <div class="container">
+
+        <h2 class="video-title text-center mb-5">
+            WORKOUT <span>VIDEOS</span>
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6"
+                 th:each="v : ${videos}">
+
+                <div class="video-card">
+
+                    <div class="video-wrapper">
+
+                        <iframe
+                                th:src="'https://www.youtube.com/embed/' + ${#strings.substringBefore(#strings.substringAfter(v.videoUrl,'youtu.be/'),'?')}"
+                                allowfullscreen>
+                        </iframe>
+
+                        <div class="play-btn">
+                            <i class="ri-play-fill"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="video-content">
+
+                        <h6 th:text="${v.title}"></h6>
+
+                        <p th:text="${v.category}"></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+    <link rel="stylesheet" th:href="@{/css/form-design.css}">
+
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div th:if="${success}" class="alert alert-success">
+                <span th:text="${success}"></span>
+            </div>
+
+            <div th:if="${error}" class="alert alert-danger">
+                <span th:text="${error}"></span>
+            </div>
+
+            <div class="container mt-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+
+                        <h5>
+                            Edit Payment Details -
+                        </h5>
+                        <form method="post" th:action="@{/admin/payments/update}">
+
+                            <input type="hidden"
+                                   name="paymentId"
+                                   th:value="${payment.paymentId}">
+
+                            <div class="mb-3">
+                                <label>Amount</label>
+                                <input type="number"
+                                       name="amount"
+                                       th:value="${payment.amount}"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Method</label>
+                                <select name="method" class="form-select">
+                                    <option value="Cash"
+                                            th:selected="${payment.method == 'Cash'}">Cash</option>
+                                    <option value="Bkash"
+                                            th:selected="${payment.method == 'Bkash'}">Bkash</option>
+                                    <option value="Nagad"
+                                            th:selected="${payment.method == 'Nagad'}">Nagad</option>
+                                </select>
+                            </div>
+
+                            <button class="btn">
+                                Update Payment
+                            </button>
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </main>
+
+</div>
+
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>

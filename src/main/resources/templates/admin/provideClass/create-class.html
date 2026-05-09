@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
+
+    <title>create blog</title>
+    <style>
+        .form-control{
+            border:1px solid #ccc;
+            border-radius:0;
+            padding:12px;
+        }
+
+        .form-control:focus{
+            border:1px solid #000;
+            box-shadow:none;
+            outline:none;
+        }
+
+        .create-btn{
+            width:100%;
+            background:#222;
+            color:#fff;
+            padding:12px;
+            font-weight:600;
+            letter-spacing:2px;
+            border:none;
+            transition: 0.3s;
+        }
+        .create-btn:hover{
+            background:var(--teal);
+            color:#fff;
+        }
+    </style>
+    <script src="https://cdn.tiny.cloud/1/wmnaz0d9gj0hhs8ipfa8x8xna7jw7y3h3pbfe322qqexjf28/tinymce/6/tinymce.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            tinymce.init({
+                selector: '#editor',
+                height: 400,
+                menubar: false,
+                plugins: 'link image lists code',
+                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | code'
+            });
+        });
+    </script>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Dashboard Wrapper -->
+<div class="dashboard-wrapper">
+    <!-- Sidebar -->
+    <div th:replace="fragments/admin-sidebar :: sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div class="container py-5">
+
+                <h2 class="mb-4">Create Class</h2>
+
+                <form th:action="@{/admin/provideClass/create}"
+                      method="post"
+                      enctype="multipart/form-data">
+
+<!--                    &lt;!&ndash; NAME &ndash;&gt;-->
+<!--                    <div class="mb-3">-->
+<!--                        <label>Class Name</label>-->
+<!--                        <input type="text" name="name" class="form-control" required>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; LEVEL &ndash;&gt;-->
+<!--                    <div class="mb-3">-->
+<!--                        <label>Level</label>-->
+<!--                        <select name="level" class="form-control">-->
+<!--                            <option>Beginner</option>-->
+<!--                            <option>Intermediate</option>-->
+<!--                            <option>Advanced</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+
+                    <!-- DURATION -->
+                    <div class="mb-3">
+                        <label>Duration</label>
+                        <input type="number" name="duration" class="form-control">
+                    </div>
+
+<!--                    &lt;!&ndash; CAPACITY &ndash;&gt;-->
+<!--                    <div class="mb-3">-->
+<!--                        <label>Capacity</label>-->
+<!--                        <input type="number" name="capacity" class="form-control">-->
+<!--                    </div>-->
+
+                    <!-- TRAINER -->
+                    <div class="mb-3">
+                        <label>Assign Trainer</label>
+                        <select name="trainerId" class="form-control">
+                            <option value="">Select Trainer</option>
+                            <option th:each="t : ${trainers}"
+                                    th:value="${t.trainerId}"
+                                    th:text="${t.user.firstName + ' ' + t.user.lastName}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- COVER IMAGE -->
+                    <div class="mb-3">
+                        <label>Cover Image</label>
+                        <input type="file" name="coverImage" class="form-control">
+                    </div>
+
+                    <!-- MULTIPLE IMAGES -->
+                    <div class="mb-3">
+                        <label>Class Images</label>
+                        <input type="file" name="images" multiple accept="image/*" class="form-control">
+                    </div>
+
+<!--                    &lt;!&ndash; SHORT DESC &ndash;&gt;-->
+<!--                    <div class="mb-3">-->
+<!--                        <label>Short Description</label>-->
+<!--                        <textarea name="shortDesc" class="form-control"></textarea>-->
+<!--                    </div>-->
+
+<!--                    &lt;!&ndash; FULL DESC &ndash;&gt;-->
+<!--                    <div class="mb-3">-->
+<!--                        <label>Full Description</label>-->
+<!--                        <textarea name="description" class="form-control"></textarea>-->
+<!--                    </div>-->
+
+                    <!-- SCHEDULE -->
+                    <h5 class="mt-4">Schedule</h5>
+
+                    <div id="scheduleContainer">
+                        <div class="schedule-card">
+                            <select name="days" class="form-control mb-2">
+                                <option>MONDAY</option>
+                                <option>TUESDAY</option>
+                                <option>WEDNESDAY</option>
+                                <option>THURSDAY</option>
+                                <option>FRIDAY</option>
+                                <option>SATURDAY</option>
+                                <option>SUNDAY</option>
+                            </select>
+
+                            <input type="time" name="startTimes" class="form-control mb-2">
+                            <input type="time" name="endTimes" class="form-control">
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="addSchedule()" class="btn btn-outline-dark mt-2">
+                        + Add More
+                    </button>
+
+                    <!-- ACTIVE -->
+                    <div class="form-check mt-3">
+                        <input type="checkbox" name="active" class="form-check-input">
+                        <label>Active</label>
+                    </div>
+
+                    <button class="btn btn-dark w-100 mt-3">Create Class</button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+    </main>
+
+</div>
+
+<script>
+    function addSchedule(){
+        const container = document.getElementById("scheduleContainer");
+
+        const html = `
+        <div class="schedule-card mt-2">
+            <select name="days" class="form-control mb-2">
+                <option>MONDAY</option>
+                <option>TUESDAY</option>
+                <option>WEDNESDAY</option>
+                <option>THURSDAY</option>
+                <option>FRIDAY</option>
+                <option>SATURDAY</option>
+                <option>SUNDAY</option>
+            </select>
+
+            <input type="time" name="startTimes" class="form-control mb-2">
+            <input type="time" name="endTimes" class="form-control">
+        </div>
+    `;
+
+        container.insertAdjacentHTML('beforeend', html);
+    }
+</script>
+<script th:src="@{/js/navbar.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+</body>
+</html>
