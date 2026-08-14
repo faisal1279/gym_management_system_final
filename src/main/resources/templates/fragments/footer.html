@@ -2,92 +2,245 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <body>
-<section th:fragment="footer" class="gym-footer"
-         th:style="|background: linear-gradient(rgba(0,0,0,0.92), rgba(0,0,0,0.92)),
-    url('@{./fragments/images/footer/footer-bg.jpg}') center/cover no-repeat;
-    color:#ccc;
-    padding-top:80px;|">
+
+<section th:fragment="footer"
+         class="gym-footer"
+         th:style="|background:
+         linear-gradient(rgba(0,0,0,.92),rgba(0,0,0,.92)),
+         url('@{/fragments/images/footer/footer-bg.jpg}')
+         center/cover no-repeat;|">
+
     <div class="container">
-        <div class="row">
 
-            <!-- Column 1 -->
-            <div class="col-lg-3 col-md-6 mb-4">
+        <div class="row gy-5">
+
+            <!-- About -->
+            <div class="col-lg-4 col-md-6">
+
                 <div class="footer-about">
-                    <h3 class="logo">ZYMZOO</h3>
+
+                    <h2 class="logo">
+                        <i class="ri-heart-pulse-fill"></i>
+                        BrightNest Gym
+                    </h2>
+
                     <p>
-                        Zymzoo winner dolor sit consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
+                        BrightNest Gym Management System is a modern fitness platform
+                        designed to simplify membership management, trainer scheduling,
+                        attendance tracking, workout planning and secure online payment.
+                        Our mission is to help members achieve a healthier lifestyle.
                     </p>
 
-                    <h6 class="footer-title">Opening time</h6>
+                    <h6 class="footer-title">
+                        <i class="ri-time-line"></i>
+                        Opening Hours
+                    </h6>
+
                     <p class="small-text">
-                        Monday - Friday: 7 am to 10 pm <br>
-                        Saturday - Sunday: 9 am to 10 pm
+                        Monday - Friday : 6:00 AM - 10:00 PM <br>
+                        Saturday : 7:00 AM - 9:00 PM <br>
+                        Sunday : Closed
                     </p>
+
                 </div>
+
             </div>
 
-            <!-- Column 2 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="footer-heading">USEFULL LINK</h5>
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6">
+
+                <h5 class="footer-heading">
+                    <i class="ri-links-line"></i>
+                    Quick Links
+                </h5>
+
                 <ul class="footer-links">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Membership</a></li>
-                    <li><a href="#">Our Classes</a></li>
-                    <li><a href="#">Instructors</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">Blog post</a></li>
+
+                    <li>
+                        <a th:href="@{/}">
+                            <i class="ri-arrow-right-s-line"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/about}">
+                            <i class="ri-arrow-right-s-line"></i>
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/classes}">
+                            <i class="ri-arrow-right-s-line"></i>
+                            Classes
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/trainers}">
+                            <i class="ri-arrow-right-s-line"></i>
+                            Trainers
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/membership}">
+                            <i class="ri-arrow-right-s-line"></i>
+                            Membership
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/contact}">
+                            <i class="ri-arrow-right-s-line"></i>
+                            Contact
+                        </a>
+                    </li>
+
                 </ul>
+
             </div>
 
-            <!-- Column 3 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="footer-heading">CONTACT INFO</h5>
+            <!-- Contact -->
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="footer-heading">
+                    <i class="ri-customer-service-2-line"></i>
+                    Contact
+                </h5>
+
                 <div class="contact-item">
-                    <strong>Address</strong>
-                    <p>252B, Central Street Main road <br> Belix Tower, New York, USA</p>
+
+                    <strong>
+                        <i class="ri-map-pin-2-fill"></i>
+                        Address
+                    </strong>
+
+                    <p>
+                        Daffodil Smart City <br>
+                        Ashulia, Dhaka, Bangladesh
+                    </p>
+
                 </div>
 
                 <div class="contact-item">
-                    <strong>Phone</strong>
-                    <p>09 (123) 456 789 <br> 09 (987) 654 321</p>
+
+                    <strong>
+                        <i class="ri-phone-fill"></i>
+                        Phone
+                    </strong>
+
+                    <p>
+                        +880 17XXXXXXXX
+                    </p>
+
                 </div>
 
                 <div class="contact-item">
-                    <strong>Web</strong>
-                    <p>info@example.com <br> www.example.com</p>
+
+                    <strong>
+                        <i class="ri-mail-fill"></i>
+                        Email
+                    </strong>
+
+                    <p>
+                        faisal@example.com
+                    </p>
+
                 </div>
+
             </div>
 
-            <!-- Column 4 -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="footer-heading">NEWSLETTER</h5>
+            <!-- Newsletter -->
+            <div class="col-lg-3 col-md-6">
+
+                <h5 class="footer-heading">
+                    <i class="ri-mail-send-fill"></i>
+                    Newsletter
+                </h5>
+
                 <p>
-                    Subscribe our Newsletter and gates latest updates of offers,
-                    products and promotions from every week we provide
+                    Subscribe to receive fitness tips, exclusive offers,
+                    latest gym updates and new classes.
                 </p>
 
                 <form class="newsletter-form">
-                    <input type="email" placeholder="Email here">
+
+                    <input
+                            type="email"
+                            placeholder="Enter your email"
+                            required>
+
                     <button type="submit">
                         <i class="ri-send-plane-fill"></i>
                     </button>
+
                 </form>
 
                 <div class="social-icons mt-4">
-                    <a href="#"><i class="ri-facebook-fill"></i></a>
-                    <a href="#"><i class="ri-instagram-line"></i></a>
-                    <a href="#"><i class="ri-twitter-fill"></i></a>
+
+                    <a href="https://facebook.com" target="_blank" title="Facebook">
+                        <i class="ri-facebook-fill"></i>
+                    </a>
+
+                    <a href="https://linkedin.com" target="_blank" title="LinkedIn">
+                        <i class="ri-linkedin-fill"></i>
+                    </a>
+
+                    <a href="https://github.com/faisal1279" target="_blank" title="GitHub">
+                        <i class="ri-github-fill"></i>
+                    </a>
+
+                    <a href="https://instagram.com" target="_blank" title="Instagram">
+                        <i class="ri-instagram-line"></i>
+                    </a>
+
                 </div>
+
             </div>
 
         </div>
+
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="footer-bottom text-center">
-        <p>© 2021 Made with ❤️ by Faisal</p>
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-6 text-center text-md-start">
+
+                    <p class="mb-0">
+                        © <span th:text="${#dates.year(#dates.createNow())}"></span>
+                        BrightNest Gym Management System.
+                        All Rights Reserved.
+                    </p>
+
+                </div>
+
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+
+                    <p class="mb-0">
+                        Developed with
+                        <i class="ri-heart-fill text-danger"></i>
+                        by
+                        <strong>Mohammad Faisal</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
+
 </section>
+
 </body>
 </html>
+

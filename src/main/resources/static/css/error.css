@@ -1,0 +1,131 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Segoe UI,sans-serif;
+
+    background:#f5f7fb;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.error-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+}
+
+.error-card{
+
+    background:#fff;
+
+    padding:60px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    max-width:550px;
+
+    width:100%;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.icon{
+
+    font-size:90px;
+
+    color:#ff4d4f;
+
+}
+
+.error-card h1{
+
+    font-size:90px;
+
+    font-weight:700;
+
+    margin-top:10px;
+
+}
+
+.error-card h3{
+
+    font-size:32px;
+
+    margin-bottom:15px;
+
+}
+
+.error-card p{
+
+    color:#666;
+
+    font-size:18px;
+
+    line-height:30px;
+
+}
+
+.buttons{
+
+    margin-top:35px;
+
+}
+
+.buttons a{
+
+    margin:5px;
+
+    padding:12px 28px;
+
+}
+
+@media(max-width:768px){
+
+    .error-card{
+
+        padding:40px 20px;
+
+    }
+
+    .error-card h1{
+
+        font-size:70px;
+
+    }
+
+    .error-card h3{
+
+        font-size:24px;
+
+    }
+
+    .icon{
+
+        font-size:70px;
+
+    }
+
+}

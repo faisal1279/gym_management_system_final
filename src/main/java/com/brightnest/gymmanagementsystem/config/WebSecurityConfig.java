@@ -4,6 +4,7 @@ import com.brightnest.gymmanagementsystem.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class WebSecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
@@ -38,7 +40,10 @@ public class WebSecurityConfig {
                                         "/",
                                         "/home",
                                         "/about",
-                                        "/contact"
+                                        "/contact",
+                                        "/403",
+                                        "/404",
+                                        "/500"
                                 ).permitAll()
 
                                 .requestMatchers(
@@ -53,7 +58,25 @@ public class WebSecurityConfig {
 
                                 .requestMatchers("/h2-console/**").permitAll()
 
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+//                                .requestMatchers("/admin/blog/**").authenticated()
+//                                .requestMatchers("/admin/blogs").authenticated()
+//
+//                                .requestMatchers("/admin/gallery/**").authenticated()
+//                                .requestMatchers("/admin/exercise/**").authenticated()
+//
+//                                .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                                .requestMatchers(
+                                        "/admin/blog/**",
+                                        "/admin/blogs",
+                                        "/admin/gallery/**",
+                                        "/admin/exercise/**"
+                                ).authenticated()
+
+                                .requestMatchers("/admin/**")
+                                .hasRole("ADMIN")
+
+//                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/profile/**").hasAnyRole("USER","ADMIN","TRAINER","MEMBER")
                                 .requestMatchers("/trainer/**").hasRole("TRAINER")
                         .requestMatchers("/member/**")
@@ -61,7 +84,7 @@ public class WebSecurityConfig {
 //                                .requestMatchers("/member/**").hasRole("MEMBER")
                                 .requestMatchers("/user/**").hasRole("USER")
                                 .requestMatchers("/product/v1/**").permitAll()
-                                .requestMatchers("/admin/classes/create").permitAll()
+//                                .requestMatchers("/admin/classes/create").permitAll()
 
                                 .anyRequest().permitAll()
                 )
@@ -78,6 +101,9 @@ public class WebSecurityConfig {
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .permitAll()
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/403")
                 )
                 .userDetailsService(customUserDetailsService)
                 .build();

@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,10 +29,18 @@ public class User {
     private String address;
     private boolean active;
     private String role;
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "role_id")
+//    private Role roleEntity;
+
     private String profileImage;
     private LocalDateTime createdAt;
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
+
+//    @OneToMany(mappedBy = "user")
+//    private List<UserPermission> userPermissions;
 }

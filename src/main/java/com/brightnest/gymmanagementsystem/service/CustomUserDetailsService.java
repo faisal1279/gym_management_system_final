@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 //        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
 //        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
 //    }
+
 @Override
 public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -50,4 +51,58 @@ public UserDetails loadUserByUsername(String email) throws UsernameNotFoundExcep
             authorities
     );
 }
+//@Override
+//public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//
+//    User user = userRepository.findByEmail(email);
+//
+//    if (user == null) {
+//        throw new UsernameNotFoundException("User not found");
+//    }
+//
+//    Set<GrantedAuthority> authorities = new HashSet<>();
+//
+//    // নতুন Role Entity থেকে Role নেবে
+//    if (user.getRoleEntity() != null) {
+//
+//        authorities.add(
+//                new SimpleGrantedAuthority(
+//                        user.getRoleEntity().getRoleName()
+//                )
+//        );
+//
+//    }
+//
+//    // Backward compatibility
+//    else if (user.getRole() != null) {
+//
+//        authorities.add(
+//                new SimpleGrantedAuthority(
+//                        user.getRole()
+//                )
+//        );
+//
+//    }
+
+
+
+
+//
+//    return new org.springframework.security.core.userdetails.User(
+//
+//            user.getEmail(),
+//
+//            user.getPassword(),
+//
+//            user.isActive(),
+//
+//            true,
+//
+//            true,
+//
+//            true,
+//
+//            authorities
+//    );
+//}
 }

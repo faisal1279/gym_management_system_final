@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+
+<body>
+
+<div th:fragment="sidebar" class="sidebar">
+
+    <!-- ================= ADMIN ================= -->
+    <div sec:authorize="hasRole('ADMIN')"
+         th:replace="fragments/admin-sidebar :: sidebar">
+    </div>
+
+    <!-- ================= MEMBER ================= -->
+    <div sec:authorize="hasRole('MEMBER')"
+         th:replace="fragments/member-sideber :: memberSidebar">
+    </div>
+
+    <!-- ================= TRAINER ================= -->
+    <div sec:authorize="hasRole('TRAINER')"
+         th:replace="fragments/trainer-sideber :: trainerSideber">
+    </div>
+
+</div>
+
+</body>
+</html>

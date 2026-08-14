@@ -32,4 +32,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 """)
     Page<User> searchUsers(String keyword, String role, Pageable pageable);
 
+//    List<User> findByRoleEntity_RoleName(String roleName);
+//
+//    List<User> findByRoleEntity_RoleId(UUID roleId);
+
 }

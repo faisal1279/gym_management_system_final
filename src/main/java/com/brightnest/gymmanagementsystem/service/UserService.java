@@ -1,6 +1,8 @@
 package com.brightnest.gymmanagementsystem.service;
 
 import com.brightnest.gymmanagementsystem.model.User;
+//import com.brightnest.gymmanagementsystem.model.role.Role;
+//import com.brightnest.gymmanagementsystem.repository.RoleRepository;
 import com.brightnest.gymmanagementsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -39,7 +42,7 @@ public class UserService {
             Files.createDirectories(Paths.get(uploadDir));
 
             String fileName = UUID.randomUUID() + "_" + profileImage.getOriginalFilename();
-            Path path = Paths.get(uploadDir + fileName);
+            Path path = Paths.get(uploadDir , fileName);
             Files.write(path, profileImage.getBytes());
 
             user.setProfileImage(fileName);
@@ -86,14 +89,13 @@ public class UserService {
         Files.createDirectories(Paths.get(uploadDir));
 
         String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();
-        Path path = Paths.get(uploadDir + fileName);
+        Path path = Paths.get(uploadDir, fileName);
         Files.write(path, image.getBytes());
 
         user.setProfileImage(fileName);
         userRepository.save(user);
     }
     //Change password
-
     public void changePassword(String email, String oldPassword, String newPassword) {
 
         User user = userRepository.findByEmail(email);
@@ -109,6 +111,11 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
+    public User getUser(UUID id) {
 
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+    }
 
 }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,18 +24,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AdminExerciseController {
     private final ExerciseService exerciseService;
-
-//    @GetMapping("/admin/exercise")
-//    public String listExercises(Model model,@RequestParam(defaultValue = "0") int page) {
-//        Pageable pageable = PageRequest.of(page,7);
-//
-//        Page<Exercise> exerciseList = exerciseService.getAllExercise(pageable);
-//
-//        model.addAttribute("exerciseList", exerciseList.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", exerciseList.getTotalPages());
-//        return "admin/exercise/exerciseList";
-//    }
 
     @GetMapping("/admin/exercise")
     public String listExercises(
@@ -62,6 +51,8 @@ public class AdminExerciseController {
     public String createExercisePage() {
         return "admin/exercise/create-exercise";
     }
+
+    @PreAuthorize("@permissionService.hasPermission(authentication,'EXERCISE_EDIT')")
     @PostMapping("/admin/exercises/create")
     public String createExercise(
             @RequestParam String name,

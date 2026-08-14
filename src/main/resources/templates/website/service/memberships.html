@@ -64,59 +64,18 @@
                         <li th:each="f : ${m.features}" th:text="${f.featureName}"></li>
                     </ul>
 
-                    <!-- Button -->
-<!--                    <div class="mt-auto text-center">-->
-<!--                        <a th:href="@{/memberships}" class="btn btn-dark">-->
-<!--                            JOIN TODAY-->
-<!--                        </a>-->
-<!--                    </div>-->
-
                     <div class="mt-auto text-center">
 
-<!--                        &lt;!&ndash; Guest User &ndash;&gt;-->
-<!--                        <a th:if="${!#authorization.expression('isAuthenticated()')}"-->
-<!--                           th:href="@{/login}"-->
-<!--                           class="btn btn-dark">-->
+                        <!-- Not Logged In -->
+                        <a th:if="${!#authorization.expression('isAuthenticated()')}"
+                           th:href="@{/login}"
+                           class="btn btn-dark">
 
-<!--                            Login To Purchase-->
+                            Login To Purchase
 
-<!--                        </a>-->
+                        </a>
 
-<!--                        &lt;!&ndash; Normal USER &ndash;&gt;-->
-<!--                        <a th:if="${#authorization.expression('hasRole(''USER'')')}"-->
-<!--                           th:href="@{/profile}"-->
-<!--                           class="btn btn-warning">-->
-
-<!--                            Complete Membership-->
-
-<!--                        </a>-->
-
-<!--                        &lt;!&ndash; MEMBER &ndash;&gt;-->
-<!--                        <form th:if="${#authorization.expression('hasRole(''MEMBER'')')}"-->
-<!--                              th:action="@{/member/payment/{id}(id=${m.membershipId})}"-->
-<!--                              method="post">-->
-
-<!--                            <button type="submit"-->
-<!--                                    class="btn btn-success">-->
-
-<!--                                Pay Online-->
-
-<!--                            </button>-->
-
-<!--                        </form>-->
-
-<!--                        <form th:if="${#authorization.expression('hasAnyRole(''USER'',''MEMBER'')')}"-->
-<!--                              th:action="@{/member/payment/{id}(id=${m.membershipId})}"-->
-<!--                              method="post">-->
-
-<!--                            <button type="submit"-->
-<!--                                    class="btn btn-success">-->
-
-<!--                                Pay Online-->
-
-<!--                            </button>-->
-
-<!--                        </form>-->
+                        <!-- Logged In -->
                         <form th:if="${#authorization.expression('isAuthenticated()')}"
                               th:action="@{/member/payment/{membershipId}(membershipId=${m.membershipId})}"
                               method="post">
@@ -133,6 +92,7 @@
                             </button>
 
                         </form>
+
                     </div>
 
                 </div>

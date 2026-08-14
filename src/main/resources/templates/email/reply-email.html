@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <style>
+
+        body{
+            margin:0;
+            padding:30px;
+            background:#f5f5f5;
+            font-family:Arial,sans-serif;
+        }
+
+        .container{
+
+            max-width:650px;
+            margin:auto;
+            background:white;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+        }
+
+        .header{
+
+            background:#111827;
+            color:white;
+            text-align:center;
+            padding:25px;
+
+        }
+
+        .content{
+
+            padding:30px;
+
+        }
+
+        .footer{
+
+            background:#f8f9fa;
+            text-align:center;
+            padding:20px;
+            font-size:13px;
+            color:#777;
+
+        }
+
+        .btn{
+
+            display:inline-block;
+            background:#f59e0b;
+            color:white !important;
+            padding:12px 22px;
+            text-decoration:none;
+            border-radius:5px;
+            margin-top:20px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h2>BrightNest Gym</h2>
+
+        <p>Professional Fitness Center</p>
+
+    </div>
+
+    <div class="content">
+
+        <h3>Hello <span th:text="${name}"></span>,</h3>
+
+        <p>
+
+            Thank you for contacting
+            <strong>BrightNest Gym.</strong>
+
+        </p>
+
+        <p>
+
+            We have reviewed your inquiry.
+
+        </p>
+
+        <div style="background:#f3f4f6;
+                    padding:20px;
+                    border-left:5px solid #f59e0b">
+
+            <p th:utext="${reply}"></p>
+
+        </div>
+
+        <p>
+
+            If you have any further questions,
+            please feel free to contact us.
+
+        </p>
+
+        <a href="http://localhost:8080"
+           class="btn">
+
+            Visit Our Website
+
+        </a>
+
+    </div>
+
+    <div class="footer">
+
+        BrightNest Gym
+
+        <br>
+
+        Email:
+        support@brightnest.com
+
+        <br>
+
+        Phone:
+        +880 123456789
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

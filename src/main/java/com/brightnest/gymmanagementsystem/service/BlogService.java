@@ -34,9 +34,7 @@ public class BlogService {
         if(user==null){
             throw new RuntimeException("User not found");
         }
-        if(!"ROLE_ADMIN".equals(user.getRole())){
-            throw new RuntimeException("User is not admin");
-        }
+
         Blog blog = new Blog();
         blog.setTitle(title);
         blog.setContent(content);
@@ -63,10 +61,6 @@ public class BlogService {
 
         return blogRepository.searchBlogs(keyword, category, pageable);
     }
-
-//    public Page<Blog> getAllPublishedBlogs(Pageable pageable) {
-//        return blogRepository.findByPublishedTrueOrderByCreatedAtDesc(pageable);
-//    }
 
     //public blog category list in search bar
     public List<String> getAllCategories() {
@@ -110,8 +104,8 @@ public class BlogService {
         User admin = userRepository.findByEmail(email);
         if (admin == null)
             throw new RuntimeException("User not found");
-        if (!"ROLE_ADMIN".equals(admin.getRole()))
-            throw new RuntimeException("Only admin can update blog");
+//        if (!"ROLE_ADMIN".equals(admin.getRole()))
+//            throw new RuntimeException("Only admin can update blog");
 
         // Find blog
         Blog blog = blogRepository.findById(blogId)
@@ -134,7 +128,6 @@ public class BlogService {
     }
     private void saveCoverImage(Blog blog,
                                 MultipartFile file) throws Exception {
-
         if (file == null || file.isEmpty()) return;
 
         String uploadDir = "uploads/blog/";
@@ -143,7 +136,7 @@ public class BlogService {
         String fileName =
                 UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-        Path path = Paths.get(uploadDir + fileName);
+        Path path = Paths.get(uploadDir , fileName);
 
         Files.write(path, file.getBytes());
 
@@ -162,7 +155,7 @@ public class BlogService {
 
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-            Path path = Paths.get(uploadDir + fileName);
+            Path path = Paths.get(uploadDir , fileName);
 
             Files.write(path, file.getBytes());
 
@@ -180,8 +173,8 @@ public class BlogService {
         if (admin == null)
             throw new RuntimeException("User not found");
 
-        if (!"ROLE_ADMIN".equals(admin.getRole()))
-            throw new RuntimeException("Only admin can delete blog");
+//        if (!"ROLE_ADMIN".equals(admin.getRole()))
+//            throw new RuntimeException("Only admin can delete blog");
 
         Blog blog = blogRepository.findById(blogId)
                 .orElseThrow(() ->

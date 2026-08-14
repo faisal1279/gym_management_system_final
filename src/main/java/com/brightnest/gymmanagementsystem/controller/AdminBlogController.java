@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +26,9 @@ public class AdminBlogController {
 
     private final BlogService blogService;
 
-//    @GetMapping("/admin/blogs")
-//    public String blogList(Model model,@RequestParam(defaultValue = "0") int page) {
-//        Pageable pageable = PageRequest.of(page, 5);
-//        Page<Blog> blogs = blogService.getAllBlogs(pageable);
-//
-//        model.addAttribute("blogs", blogs.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", blogs.getTotalPages());
-//        return "admin/blog/blog-list";
-//    }
+
 @GetMapping("/admin/blogs")
+//@PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_VIEW')")
 public String adminBlogs(
         @RequestParam(defaultValue = "") String keyword,
         @RequestParam(required = false) String category,
@@ -62,10 +55,12 @@ public String adminBlogs(
     return "admin/blog/blog-list";
 }
     @GetMapping("/admin/blog/create")
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_CREATE')")
     public String createBlogPage(Model model) {
         return "admin/blog/create-blog";
     }
     // Create blog POST
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_CREATE')")
     @PostMapping("/admin/blog/create")
     public String createBlog(
             @RequestParam String title,
@@ -96,11 +91,13 @@ public String adminBlogs(
         return "redirect:/admin/blogs";
     }
     @GetMapping("/admin/blog/view/{id}")
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_VIEW')")
     public String viewBlogPage(@PathVariable UUID id, Model model) {
         model.addAttribute("blog",blogService.getBlog(id));
         return "admin/blog/view-blog";
     }
     @GetMapping("/admin/blog/edit/{id}")
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_EDIT')")
     public String editBlog(
             @PathVariable UUID id,
             Model model
@@ -113,6 +110,7 @@ public String adminBlogs(
     }
     // Update blog POST
     @PostMapping("/admin/blog/update/{id}")
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_EDIT')")
     public String updateBlog(
             @PathVariable UUID id,
             @RequestParam String title,
@@ -142,6 +140,7 @@ public String adminBlogs(
     }
 
     // Delete blog
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_DELETE')")
     @GetMapping("/admin/blog/delete/{id}")
     public String deleteBlog(@PathVariable UUID id,
                              Principal principal,
@@ -157,6 +156,7 @@ public String adminBlogs(
 
     // Delete single blog image
     @GetMapping("/admin/blog/image/delete/{id}")
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'BLOG_EDIT')")
     public String deleteImage(@PathVariable UUID id,
                               RedirectAttributes redirectAttributes) {
         try {

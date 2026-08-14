@@ -22,8 +22,31 @@
         <li><a th:href="@{/member/payments}"><i class="ri-wallet-line"></i><span>Payments</span></a></li>
 
         <li><a th:href="@{/profile}"><i class="ri-user-settings-line"></i><span>Profile</span></a></li>
+
+<!--        <li sec:authorize="@permissionService.hasPermission(authentication,'BLOG_VIEW')">-->
+<!--            <a th:href="@{/admin/blogs}">-->
+<!--                <i class="ri-article-line"></i>-->
+<!--                <span>Blog Management</span>-->
+<!--            </a>-->
+<!--        </li>-->
+
+<!--        <li sec:authorize="@permissionService.hasPermission(authentication,'GALLERY_VIEW')">-->
+<!--            <a th:href="@{/admin/gallery}">-->
+<!--                <i class="ri-gallery-line"></i>-->
+<!--                <span>Gallery Management</span>-->
+<!--            </a>-->
+<!--        </li>-->
+
+<!--        <li sec:authorize="@permissionService.hasPermission(authentication,'EXERCISE_VIEW')">-->
+<!--            <a th:href="@{/admin/exercise}">-->
+<!--                <i class="ri-run-line"></i>-->
+<!--                <span>Exercise Management</span>-->
+<!--            </a>-->
+<!--        </li>-->
+
     </ul>
 </aside>
 
 </body>
 </html>
+

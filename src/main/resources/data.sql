@@ -1,4 +1,553 @@
+-- INSERT INTO ROLES (
+--     ROLE_ID,
+--     ACTIVE,
+--     CREATED_AT,
+--     DESCRIPTION,
+--     ROLE_NAME
+-- ) VALUES
+--       (
+--           '0b3c9176-b0a8-4df3-a30d-8112b6319cc9',
+--           TRUE,
+--           '2026-08-08 21:45:54.821801',
+--           'System Administrator',
+--           'ROLE_ADMIN'
+--       ),
+--       (
+--           '27182222-5889-4a45-9fb8-67a587128c9d',
+--           TRUE,
+--           '2026-08-08 21:45:54.93875',
+--           'Gym Member',
+--           'ROLE_MEMBER'
+--       ),
+--       (
+--           '2c68f8ab-9fad-4111-8bed-7a7f66304d7c',
+--           TRUE,
+--           '2026-08-08 21:45:54.943766',
+--           'Gym Trainer',
+--           'ROLE_TRAINER'
+--       ),
+--       (
+--           'e176e9bf-a9fe-4af0-a698-2bbfe91e08a5',
+--           TRUE,
+--           '2026-08-08 21:45:54.947766',
+--           'Normal User',
+--           'ROLE_USER'
+--       );
+--
+--
+-- INSERT INTO PERMISSIONS (
+--     PERMISSION_ID,
+--     ACTIVE,
+--     CREATED_AT,
+--     DESCRIPTION,
+--     MODULE_NAME,
+--     PERMISSION_NAME
+-- ) VALUES
+--       (
+--           'b48de7fb-de67-4217-86b5-8fa866d46fd7',
+--           TRUE,
+--           '2026-08-08 21:45:55.137034',
+--           'USER_VIEW',
+--           'USER',
+--           'USER_VIEW'
+--       ),
+--       (
+--           '73f4316e-8fae-4e89-a1bf-534aa0456af1',
+--           TRUE,
+--           '2026-08-08 21:45:55.140034',
+--           'USER_CREATE',
+--           'USER',
+--           'USER_CREATE'
+--       ),
+--       (
+--           '7d993248-6e46-4545-9fb6-bb896102d329',
+--           TRUE,
+--           '2026-08-08 21:45:55.144554',
+--           'USER_EDIT',
+--           'USER',
+--           'USER_EDIT'
+--       ),
+--       (
+--           'fc0292df-df8a-4787-a937-3ac71733a5dd',
+--           TRUE,
+--           '2026-08-08 21:45:55.148708',
+--           'USER_DELETE',
+--           'USER',
+--           'USER_DELETE'
+--       ),
+--       (
+--           'b4b24415-26a4-474f-90fe-8bd46f933c3b',
+--           TRUE,
+--           '2026-08-08 21:45:55.222581',
+--           'MEMBER_VIEW',
+--           'MEMBER',
+--           'MEMBER_VIEW'
+--       ),
+--       (
+--           '8592db2c-8a2d-4a9f-a316-f38a4627ec33',
+--           TRUE,
+--           '2026-08-08 21:45:55.23306',
+--           'MEMBER_CREATE',
+--           'MEMBER',
+--           'MEMBER_CREATE'
+--       ),
+--       (
+--           '27ad544f-cce5-4ac1-a439-0a79190bdfa1',
+--           TRUE,
+--           '2026-08-08 21:45:55.239002',
+--           'MEMBER_EDIT',
+--           'MEMBER',
+--           'MEMBER_EDIT'
+--       ),
+--       (
+--           '52d950c6-460c-4bcf-9ca9-2b2ba53a8098',
+--           TRUE,
+--           '2026-08-08 21:45:55.246525',
+--           'MEMBER_DELETE',
+--           'MEMBER',
+--           'MEMBER_DELETE'
+--       ),
+--       (
+--           '3885a61e-6e98-4127-8727-4c4f0c2d3511',
+--           TRUE,
+--           '2026-08-08 21:45:55.252548',
+--           'TRAINER_VIEW',
+--           'TRAINER',
+--           'TRAINER_VIEW'
+--       ),
+--       (
+--           '0fcb467f-485a-4f42-a273-ab421e712141',
+--           TRUE,
+--           '2026-08-08 21:45:55.256766',
+--           'TRAINER_CREATE',
+--           'TRAINER',
+--           'TRAINER_CREATE'
+--       ),
+--       (
+--           'f286650e-c533-4b5c-8dbc-9dc962347d03',
+--           TRUE,
+--           '2026-08-08 21:45:55.262766',
+--           'TRAINER_EDIT',
+--           'TRAINER',
+--           'TRAINER_EDIT'
+--       ),
+--       (
+--           'b821c46e-f2be-4b77-91b2-d6bd2e323e71',
+--           TRUE,
+--           '2026-08-08 21:45:55.268001',
+--           'TRAINER_DELETE',
+--           'TRAINER',
+--           'TRAINER_DELETE'
+--       ),
+--       (
+--           'def70a1f-70d0-4558-b56d-8ea34378f1a2',
+--           TRUE,
+--           '2026-08-08 21:45:55.274613',
+--           'CLASS_VIEW',
+--           'CLASS',
+--           'CLASS_VIEW'
+--       ),
+--       (
+--           '72df6d40-5c17-413a-8095-099ebbd1987a',
+--           TRUE,
+--           '2026-08-08 21:45:55.279661',
+--           'CLASS_CREATE',
+--           'CLASS',
+--           'CLASS_CREATE'
+--       ),
+--       (
+--           '0893ca6d-2f83-4a7a-8155-63f0974f925a',
+--           TRUE,
+--           '2026-08-08 21:45:55.285661',
+--           'CLASS_EDIT',
+--           'CLASS',
+--           'CLASS_EDIT'
+--       ),
+--       (
+--           '0ac5c325-2050-4c5d-983d-ddab505cad5b',
+--           TRUE,
+--           '2026-08-08 21:45:55.288659',
+--           'CLASS_DELETE',
+--           'CLASS',
+--           'CLASS_DELETE'
+--       ),
+--       (
+--           '9fbe00fe-385f-410d-942e-bdc409b1f92a',
+--           TRUE,
+--           '2026-08-08 21:45:55.290663',
+--           'BLOG_VIEW',
+--           'BLOG',
+--           'BLOG_VIEW'
+--       ),
+--       (
+--           'dce50c3a-31c3-4b42-b062-aba6b1f2bd82',
+--           TRUE,
+--           '2026-08-08 21:45:55.294786',
+--           'BLOG_CREATE',
+--           'BLOG',
+--           'BLOG_CREATE'
+--       ),
+--       (
+--           '5f3e13b2-628b-4b7d-8b31-e0936d9717fe',
+--           TRUE,
+--           '2026-08-08 21:45:55.297045',
+--           'BLOG_EDIT',
+--           'BLOG',
+--           'BLOG_EDIT'
+--       ),
+--       (
+--           '66eae9d9-02d8-4079-9985-bbae4aa73b86',
+--           TRUE,
+--           '2026-08-08 21:45:55.300075',
+--           'BLOG_DELETE',
+--           'BLOG',
+--           'BLOG_DELETE'
+--       ),
+--       (
+--           '36fc2f22-bc32-46cd-a96e-2fcb3948d470',
+--           TRUE,
+--           '2026-08-08 21:45:55.302057',
+--           'GALLERY_VIEW',
+--           'GALLERY',
+--           'GALLERY_VIEW'
+--       ),
+--       (
+--           'dcd71694-95ba-4ab7-ae59-d929a72a62fb',
+--           TRUE,
+--           '2026-08-08 21:45:55.304079',
+--           'GALLERY_CREATE',
+--           'GALLERY',
+--           'GALLERY_CREATE'
+--       ),
+--       (
+--           'e45cd153-ca76-4571-bebe-2f65b381874b',
+--           TRUE,
+--           '2026-08-08 21:45:55.306063',
+--           'GALLERY_EDIT',
+--           'GALLERY',
+--           'GALLERY_EDIT'
+--       ),
+--       (
+--           'f826af8b-7b00-4ace-90f8-281ea18f2c30',
+--           TRUE,
+--           '2026-08-08 21:45:55.309062',
+--           'GALLERY_DELETE',
+--           'GALLERY',
+--           'GALLERY_DELETE'
+--       ),
+--       (
+--           '4ad61e7a-a1cb-4b44-94f4-d40a36255f83',
+--           TRUE,
+--           '2026-08-08 21:45:55.312063',
+--           'EXERCISE_VIEW',
+--           'EXERCISE',
+--           'EXERCISE_VIEW'
+--       ),
+--       (
+--           'bfce7386-8357-49eb-8a70-e66581102db6',
+--           TRUE,
+--           '2026-08-08 21:45:55.314059',
+--           'EXERCISE_CREATE',
+--           'EXERCISE',
+--           'EXERCISE_CREATE'
+--       ),
+--       (
+--           '4995b7c0-3796-4526-b085-60acfc3aa20f',
+--           TRUE,
+--           '2026-08-08 21:45:55.316064',
+--           'EXERCISE_EDIT',
+--           'EXERCISE',
+--           'EXERCISE_EDIT'
+--       ),
+--       (
+--           '91e7180b-d143-49db-97d6-b1b370fb48e1',
+--           TRUE,
+--           '2026-08-08 21:45:55.318064',
+--           'EXERCISE_DELETE',
+--           'EXERCISE',
+--           'EXERCISE_DELETE'
+--       ),
+--       (
+--           'b8c5ac6e-3a1c-4d63-9af3-f76465eacecd',
+--           TRUE,
+--           '2026-08-08 21:45:55.320063',
+--           'PAYMENT_VIEW',
+--           'PAYMENT',
+--           'PAYMENT_VIEW'
+--       ),
+--       (
+--           '75e51713-cd8b-4545-af19-48cd1919d9a1',
+--           TRUE,
+--           '2026-08-08 21:45:55.322059',
+--           'PAYMENT_CREATE',
+--           'PAYMENT',
+--           'PAYMENT_CREATE'
+--       ),
+--       (
+--           '9e3a18e5-de47-48e0-825c-3c0452308805',
+--           TRUE,
+--           '2026-08-08 21:45:55.326067',
+--           'PAYMENT_EDIT',
+--           'PAYMENT',
+--           'PAYMENT_EDIT'
+--       ),
+--       (
+--           'ac89260b-40d0-4e32-827b-b8454a1a5c29',
+--           TRUE,
+--           '2026-08-08 21:45:55.332469',
+--           'PAYMENT_DELETE',
+--           'PAYMENT',
+--           'PAYMENT_DELETE'
+--       ),
+--       (
+--           'd26162e7-5405-4424-983e-408ef6347bc0',
+--           TRUE,
+--           '2026-08-08 21:45:55.334465',
+--           'CONTACT_VIEW',
+--           'CONTACT',
+--           'CONTACT_VIEW'
+--       ),
+--       (
+--           'baa7f800-cf05-4409-b574-263d7351039d',
+--           TRUE,
+--           '2026-08-08 21:45:55.336474',
+--           'CONTACT_REPLY',
+--           'CONTACT',
+--           'CONTACT_REPLY'
+--       ),
+--       (
+--           '554fda96-c7dd-490a-97cc-578ae459145d',
+--           TRUE,
+--           '2026-08-08 21:45:55.337464',
+--           'CONTACT_DELETE',
+--           'CONTACT',
+--           'CONTACT_DELETE'
+--       ),
+--       (
+--           '9aef8a70-c79d-4438-b5eb-2fc4af3ee96d',
+--           TRUE,
+--           '2026-08-08 21:45:55.33947',
+--           'ROLE_VIEW',
+--           'ROLE',
+--           'ROLE_VIEW'
+--       ),
+--       (
+--           '93ec2b8e-f70c-46ed-bee8-6528f1dc5480',
+--           TRUE,
+--           '2026-08-08 21:45:55.34347',
+--           'ROLE_CREATE',
+--           'ROLE',
+--           'ROLE_CREATE'
+--       ),
+--       (
+--           'd0e607e0-c1c1-4298-9e57-317a0c144cc5',
+--           TRUE,
+--           '2026-08-08 21:45:55.347546',
+--           'ROLE_EDIT',
+--           'ROLE',
+--           'ROLE_EDIT'
+--       ),
+--       (
+--           'b2e2f2ee-276f-42db-90be-e43cbf1862d8',
+--           TRUE,
+--           '2026-08-08 21:45:55.349546',
+--           'ROLE_DELETE',
+--           'ROLE',
+--           'ROLE_DELETE'
+--       ),
+--       (
+--           '3a823109-1305-4a05-b8ce-fca84273d25f',
+--           TRUE,
+--           '2026-08-08 21:45:55.352657',
+--           'ROLE_PERMISSION_ASSIGN',
+--           'ROLE',
+--           'ROLE_PERMISSION_ASSIGN'
+--       ),
+--       (
+--           '400a7d03-d1a3-4c83-a390-b4fd02232fbb',
+--           TRUE,
+--           '2026-08-08 21:45:55.354648',
+--           'SETTING_VIEW',
+--           'SETTING',
+--           'SETTING_VIEW'
+--       ),
+--       (
+--           '832276cf-9dda-405e-abc7-c6bf3237c8bf',
+--           TRUE,
+--           '2026-08-08 21:45:55.356653',
+--           'SETTING_EDIT',
+--           'SETTING',
+--           'SETTING_EDIT'
+--       ),
+--       (
+--           '1ce5ac8f-3a8f-470b-aeed-12dc9c36400f',
+--           TRUE,
+--           '2026-08-08 21:45:55.359651',
+--           'DASHBOARD_VIEW',
+--           'DASHBOARD',
+--           'DASHBOARD_VIEW'
+--       ),
+--       (
+--           'c868404a-0ed5-46b0-b9c9-d9c2bb70d6b1',
+--           TRUE,
+--           '2026-08-08 21:45:55.362675',
+--           'REPORT_VIEW',
+--           'REPORT',
+--           'REPORT_VIEW'
+--       ),
+--       (
+--           '3f4f6c18-a033-4c85-839c-e2c43eb8be4c',
+--           TRUE,
+--           '2026-08-08 21:45:55.36465',
+--           'ATTENDANCE_VIEW',
+--           'ATTENDANCE',
+--           'ATTENDANCE_VIEW'
+--       ),
+--       (
+--           '6f1252f0-0346-4e70-bb6b-b96b8b6a24ff',
+--           TRUE,
+--           '2026-08-08 21:45:55.366646',
+--           'ATTENDANCE_EDIT',
+--           'ATTENDANCE',
+--           'ATTENDANCE_EDIT'
+--       );
 
+-- INSERT INTO USER_TABLE (
+--     ID,
+--     ACTIVE,
+--     ADDRESS,
+--     CREATED_AT,
+--     EMAIL,
+--     FIRST_NAME,
+--     GENDER,
+--     LAST_NAME,
+--     PASSWORD,
+--     PHONE,
+--     PROFILE_IMAGE,
+--     ROLE
+-- --     ROLE_ID
+-- ) VALUES
+--       (
+--           '07ca14fd-ef02-469e-8cc7-d791ce6364d2',
+--           TRUE,
+--           'Dhaka',
+--           '2026-02-03 22:52:51.628886',
+--           'faisal22205101279@diu.edu.bd',
+--           'Mohammad',
+--           'Male',
+--           'Faisal',
+--           '$2a$10$EZ8xFmOVa68UQU3Ee6UzmOmczdk2jDfrtsPXhsIMFZHS.cN58r7ke',
+--           '01608949908',
+--           NULL,
+--           'ROLE_ADMIN'
+-- --           '0b3c9176-b0a8-4df3-a30d-8112b6319cc9'
+--       ),
+--       (
+--           'df28677f-6b41-4fd4-8640-9fa347cf76a3',
+--           TRUE,
+--           'Dhaka',
+--           '2026-02-03 22:53:11.327467',
+--           'faisal@gmail.com',
+--           'Mohammad',
+--           'Male',
+--           'Faisal',
+--           '$2a$10$NyCG6vAsCQ/f9YwdRts5yOs7RtvkvfuhGAEguN/HEBG69Pz8q/5RW',
+--           '01608949908',
+--           NULL,
+--           'ROLE_MEMBER'
+-- --           '27182222-5889-4a45-9fb8-67a587128c9d'
+--       ),
+--       (
+--           '29f6fc2f-fe92-4cbd-911e-0289387c3353',
+--           TRUE,
+--           'Dhaka',
+--           '2026-02-03 22:53:36.64161',
+--           'user@gmail.com',
+--           'Mohammad',
+--           'Male',
+--           'Faisal',
+--           '$2a$10$c1vBVHysOuys1GYzVqrGzejL8awlOc4eLkLqWbwga0/Gyd4lH9GYu',
+--           '01608949908',
+--           '00fb0682-3a04-49b6-8adf-7166f13fa8ce_ds2.webp',
+--           'ROLE_TRAINER'
+-- --           '2c68f8ab-9fad-4111-8bed-7a7f66304d7c'
+--       ),
+--       (
+--           '535a2636-2d60-49e0-ada0-08705b2fec77',
+--           TRUE,
+--           'Dhaka',
+--           '2026-02-04 17:32:42.865116',
+--           'user1@gmail.com',
+--           'Mohammad',
+--           'Male',
+--           'Faisal',
+--           '$2a$10$OWZKODaZKOuGz9Wk.q.tle7OK4Pjf2RK8o.tFkQ9nqaSnEo9jPGFy',
+--           '01608949908',
+--           '0d4bd154-cbec-4605-9f7c-40a1f6de679b_Personal+Trainer+Profile+(Full+Size).webp',
+--           'ROLE_TRAINER'
+-- --           '2c68f8ab-9fad-4111-8bed-7a7f66304d7c'
+--       ),
+--       (
+--           '2a8988c0-8d0f-4a18-af56-3ba0762afb51',
+--           TRUE,
+--           'Cox''s Bazar',
+--           '2026-02-04 17:33:19.110466',
+--           'user12@gmail.com',
+--           'Mohammad',
+--           'Male',
+--           'Faisal',
+--           '$2a$10$Edv8RzWhWJAKuDJ1k9jhH.xoidI7ytLBbjNwNxB82LMizH5C6eRNK',
+--           '01608949908',
+--           '0c7953a6-fdf6-48dd-b423-192518bbee34_Matt-WP.jpg',
+--           'ROLE_TRAINER'
+-- --           '2c68f8ab-9fad-4111-8bed-7a7f66304d7c'
+--       ),
+--       (
+--           '3992c6d2-0773-4ef0-ad2b-2e7f9df497c8',
+--           TRUE,
+--           'Chittagong',
+--           '2026-02-04 17:34:03.752396',
+--           'user123@gmail.com',
+--           'Mrs',
+--           'Female',
+--           'Fatima',
+--           '$2a$10$yaBd8.aZaDVrVG2w/OAWBedQaYKjeiZdFMIsk8iABsTAUZvkWKR7C',
+--           '01608949908',
+--           NULL,
+--           'ROLE_USER'
+-- --           'e176e9bf-a9fe-4af0-a698-2bbfe91e08a5'
+--       ),
+--       (
+--           '7ed12be7-dbe1-49bd-8617-6bb97673dfdc',
+--           TRUE,
+--           'Chowfaldondi,Cox''s bazar,Chittagong',
+--           '2026-02-08 23:09:16.674239',
+--           'arif@gmail.com',
+--           'Md',
+--           'Male',
+--           'Arif',
+--           '$2a$10$ZfjAQeltjjoWmp4xSO.PC.pN1qAPjdKrWeXX1perOoekPbB8MXqh6',
+--           '01608949908',
+--           'd5a6ac84-876c-4ca3-8931-acffdcf3adfa_WhatsApp Image 2025-09-11 at 17.06.28_f81c59c2.jpg',
+--           'ROLE_MEMBER'
+-- --           '27182222-5889-4a45-9fb8-67a587128c9d'
+--       ),
+--       (
+--           'e33d53f5-849c-4e4f-b329-7f70c91ff85d',
+--           TRUE,
+--           'Mirpur-10,Dhaka,Bangladesh',
+--           '2026-04-04 00:50:32.673678',
+--           'faisal12@gmail.com',
+--           'MR',
+--           'Male',
+--           'James',
+--           '$2a$10$01IBHmUUpXSGlsRGkWsAUe7VZs4TSpAf9j.6ZYbQ3pt.JpGNxJHx2',
+--           '01608949908',
+--           '323e7b98-4365-45b0-a072-3a6dea266e6a_gun-j-profile-1.jpg',
+--           'ROLE_TRAINER'
+-- --           '2c68f8ab-9fad-4111-8bed-7a7f66304d7c'
+--       );
+-- --
 INSERT INTO USER_TABLE (ACTIVE, CREATED_AT, ID, ADDRESS, EMAIL, FIRST_NAME, GENDER, LAST_NAME, PASSWORD, PHONE, PROFILE_IMAGE, ROLE) VALUES
                                                                                                                                          (TRUE, '2026-02-03 22:52:51.628886', '07ca14fd-ef02-469e-8cc7-d791ce6364d2', 'Dhaka', 'faisal22205101279@diu.edu.bd', 'Mohammad', 'Male', 'Faisal', '$2a$10$EZ8xFmOVa68UQU3Ee6UzmOmczdk2jDfrtsPXhsIMFZHS.cN58r7ke', '01608949908', NULL, 'ROLE_ADMIN'),
                                                                                                                                          (TRUE, '2026-02-03 22:53:11.327467', 'df28677f-6b41-4fd4-8640-9fa347cf76a3', 'Dhaka', 'faisal@gmail.com', 'Mohammad', 'Male', 'Faisal', '$2a$10$NyCG6vAsCQ/f9YwdRts5yOs7RtvkvfuhGAEguN/HEBG69Pz8q/5RW', '01608949908', NULL, 'ROLE_MEMBER'),
@@ -218,126 +767,6 @@ VALUES
 
 
 
-
--- exercise
--- INSERT INTO EXERCISE
--- (ACTIVE, EXERCISE_ID, WARNING, DESCRIPTION, DIFFICULTY, NAME, TARGET_MUSCLE)
--- VALUES
---     (TRUE,'70c10804-9fdf-4ed8-9348-790362402925',
---      'Avoid if you have shoulder or wrist injuries.',
---      'Start in a plank position with your hands slightly wider than shoulder width.
---
---      Lower your body until your chest nearly touches the floor.
---
---      Keep your body straight and core tight.
---
---      Push back up to the starting position.',
---      NULL,'Push Up',NULL),
---
---     (TRUE,'e1a3167e-79f3-49a1-8906-d9a54c3b18d5',
---      'Do not perform if you have severe knee pain.',
---      'Stand with your feet shoulder-width apart.
---
---      Lower your body by bending your knees and pushing your hips back.
---
---      Keep your chest up and back straight.
---
---      Return to standing position.',
---      NULL,'Bodyweight Squat',NULL),
---
---     (TRUE,'c83118a1-8c2f-4fa4-a0d5-0575cc31fb72',
---      'Stop if you feel pain in your lower back.',
---      'Start in a forearm plank position with elbows directly under shoulders.
---
---      Keep your body in a straight line from head to heels.
---
---      Engage your core and hold the position.',
---      NULL,'Plank Hold',NULL),
---
---     (TRUE,'863f9b01-182c-4f6d-8788-20be39d57674',
---      'Avoid if you have knee ligament injuries.',
---      'Stand upright with feet together.
---
---      Step forward with one leg and lower your hips until both knees are bent at about 90 degrees.
---
---      Push back to the starting position and switch legs.',
---      NULL,'Forward Lunges',NULL),
---
---     (TRUE,'aa8d4010-e3e0-40cb-89f5-b0b5f7fd3176',
---      NULL,
---      NULL,
---      NULL,'Mountain Climbers',NULL),
---
---     (TRUE,'e8127c67-bff6-4612-9a7c-819c921c2fae',
---      'Not recommended for people with wrist or shoulder pain.',
---      'Start in a push-up position.
---
---      Bring one knee toward your chest, then quickly switch legs.
---
---      Continue alternating legs in a running motion.',
---      NULL,'Mountain Climbers',NULL),
---
---     (TRUE,'375a860f-2ced-45c3-8977-c4504a6f9fdb',
---      NULL,
---      NULL,
---      NULL,'Jumping Jacks',NULL),
---
---     (TRUE,'f4b6adca-5204-4ec1-862b-d3cce611f17c',
---      'Avoid if you have ankle or knee injuries.',
---      'Stand upright with your feet together and arms at your sides.
---
---      Jump while spreading your legs and raising your arms overhead.
---
---      Return to the starting position.',
---      NULL,'Jumping Jacks',NULL),
---
---     (TRUE,'b2962988-5004-4820-92f7-c2ed5d3e6ca8',
---      'Avoid if you have heart or joint problems.',
---      'Start standing, drop into a squat, kick feet back to a plank, perform a push-up, jump forward and jump up.',
---      NULL,'Burpees',NULL),
---
---     (TRUE,'8a0d33e9-fd57-4dbe-96c7-aa31b0e01a67',
---      'Avoid if you have lower back issues.',
---      'Lie on your back with knees bent and lift your upper body toward your knees.',
---      NULL,'Sit Ups',NULL),
---
---     (TRUE,'40555ad6-e98b-4c0f-a9f3-b0d248978679',
---      'Avoid if you have neck strain.',
---      'Lie on your back and alternate touching elbows to opposite knees in a cycling motion.',
---      NULL,'Bicycle Crunch',NULL),
---
---     (TRUE,'61cc52b1-0eaf-4da4-8f39-d903419a39ce',
---      'Avoid if you have lower back pain.',
---      'Lie flat and raise your legs straight up while keeping your core engaged.',
---      NULL,'Leg Raises',NULL),
---
---     (TRUE,'edb5cee1-f8a1-4abb-82a4-2f2f66603baf',
---      'Avoid if you have shoulder or chest injuries. Always use a spotter for heavy weights.',
---      'Lie flat on a bench and grip the barbell slightly wider than shoulder width. Lower the bar to your chest and press it back up until your arms are fully extended.',
---      NULL,'Bench Press',NULL),
---
---     (TRUE,'43a22396-61a5-4752-9c6b-c28761d20b83',
---      'Do not lean too far back and avoid jerking the weight.',
---      'Sit at the lat pulldown machine and grip the bar wide. Pull the bar down toward your chest while squeezing your back muscles.',
---      NULL,'Lat Pulldown',NULL),
---
---     (TRUE,'a6c27daa-bd9c-4955-8596-8ed34c868a93',
---      'Do not lock your knees at the top.',
---      'Sit on the leg press machine and place your feet shoulder-width apart on the platform. Push the platform away by extending your legs.',
---      NULL,'Leg Press',NULL),
---
---     (TRUE,'32396b90-69f6-4f2e-b104-5b908afd2ebc',
---      'Keep your elbows close to your body to avoid injury.',
---      'Stand at a cable machine holding the rope or bar attachment. Push the handle down by extending your arms.',
---      NULL,'Cable Tricep Pushdown',NULL),
---
---     (TRUE,'b671b290-95c5-4cec-9785-4cc3a65c6bc6',
---      'Avoid rounding your back while pulling.',
---      'Sit at the cable row machine and pull the handle toward your waist while squeezing your shoulder blades.',
---      NULL,'Seated Row',NULL);
---
---
-
 INSERT INTO EXERCISE
 (ACTIVE, EXERCISE_ID, WARNING, DESCRIPTION, DIFFICULTY, NAME, TARGET_MUSCLE, CREATED_AT)
 VALUES
@@ -458,6 +887,7 @@ VALUES
      'Avoid rounding your back...',
      'Sit at the cable row machine and pull the handle toward your waist while squeezing your shoulder blades.',
      'BEGINNER','Seated Row','Back',CURRENT_TIMESTAMP);
+
 INSERT INTO MEMBERSHIP_FEATURE (ID, MEMBERSHIP_ID, FEATURE_NAME) VALUES
                                                                      (1, '4d81c365-18d3-4dbd-8d9d-e1f513e74c4f', 'Gym floor access (Cardio + Basic Equipment)'),
                                                                      (2, '4d81c365-18d3-4dbd-8d9d-e1f513e74c4f', 'Fixed time slot access (e.g., 6am–10am)'),

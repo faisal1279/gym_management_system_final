@@ -12,7 +12,86 @@
     <link rel="stylesheet" th:href="@{/css/makeTrainer.css}">
     <link rel="stylesheet" th:href="@{/css/form-design.css}">
 
+    <style>
+        /* ===============================
+   PROFESSIONAL ACTION BUTTONS
+   =============================== */
 
+        .actions-column{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Common Button */
+        .action-btn{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            min-width: 105px;
+            height: 40px;
+
+            padding: 0 14px;
+
+            border-radius: 10px;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: all 0.25s ease;
+        }
+
+        /* Icon */
+        .action-btn i{
+            font-size: 16px;
+        }
+
+        /* Manage Button */
+        .manage-btn{
+            background: #111827;
+            color: #fff;
+            border: 1px solid #111827;
+        }
+
+        .manage-btn:hover{
+            background: #000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        /* View Button */
+        .view-btn{
+            background: #f3f4f6;
+            color: #111827;
+            border: 1px solid #e5e7eb;
+        }
+
+        .view-btn:hover{
+            background: var(--teal);
+            border-color: var(--teal);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile */
+        @media(max-width:768px){
+
+            .actions-column{
+                gap: 8px;
+            }
+
+            .action-btn{
+                min-width: 95px;
+                height: 38px;
+                font-size: 13px;
+            }
+        }
+    </style>
     <title>Admin Dashboard</title>
 </head>
 <body>
@@ -129,27 +208,33 @@
                             </span>
                                     </td>
 
-<!--                                    <td>-->
-
-<!--                                        <a class="btn btn-sm btn-outline-primary"-->
-<!--                                           th:href="@{'/trainer/template/details/' + ${t.id}}">-->
-<!--                                            Manage-->
-<!--                                        </a>-->
-<!--                                        <a class="btn btn-sm btn-success"-->
-<!--                                           th:href="@{'/trainer/template/view/' + ${t.id}}">-->
-<!--                                            <i class="ri-eye-line"></i> View-->
-<!--                                        </a>-->
-
+<!--                                    <td class="d-flex gap-2">-->
+<!--                                            <a class="btn btn-sm btn-outline-primary"-->
+<!--                                               th:href="@{'/trainer/template/details/' + ${t.id}}">-->
+<!--                                                Manage-->
+<!--                                            </a>-->
+<!--                                            <a class="btn btn-sm btn-success"-->
+<!--                                               th:href="@{'/trainer/template/view/' + ${t.id}}">-->
+<!--                                                <i class="ri-eye-line"></i> View-->
+<!--                                            </a>-->
 <!--                                    </td>-->
-                                    <td class="d-flex gap-2">
-                                            <a class="btn btn-sm btn-outline-primary"
-                                               th:href="@{'/trainer/template/details/' + ${t.id}}">
-                                                Manage
-                                            </a>
-                                            <a class="btn btn-sm btn-success"
-                                               th:href="@{'/trainer/template/view/' + ${t.id}}">
-                                                <i class="ri-eye-line"></i> View
-                                            </a>
+
+                                    <td class="actions-column">
+
+                                        <!-- Manage -->
+                                        <a class="action-btn manage-btn"
+                                           th:href="@{'/trainer/template/details/' + ${t.id}}">
+                                            <i class="ri-settings-3-line"></i>
+                                            <span>Manage</span>
+                                        </a>
+
+                                        <!-- View -->
+                                        <a class="action-btn view-btn"
+                                           th:href="@{'/trainer/template/view/' + ${t.id}}">
+                                            <i class="ri-eye-line"></i>
+                                            <span>View</span>
+                                        </a>
+
                                     </td>
 
                                 </tr>

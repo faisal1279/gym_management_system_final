@@ -383,9 +383,33 @@
 
                         <!-- Button -->
                         <div class="mt-auto text-center">
-                            <a th:href="@{/memberships}" class="btn btn-dark">
-                                JOIN TODAY
+                            <!-- Not Logged In -->
+                            <a th:if="${!#authorization.expression('isAuthenticated()')}"
+                               th:href="@{/login}"
+                               class="btn btn-dark">
+
+                                Login To Purchase
+
                             </a>
+
+                            <!-- Logged In -->
+                            <form th:if="${#authorization.expression('isAuthenticated()')}"
+                                  th:action="@{/member/payment/{membershipId}(membershipId=${m.membershipId})}"
+                                  method="post">
+
+                                <input type="hidden"
+                                       th:name="${_csrf.parameterName}"
+                                       th:value="${_csrf.token}">
+
+                                <button type="submit"
+                                        class="btn btn-success">
+
+                                    Pay Online
+
+                                </button>
+
+                            </form>
+
                         </div>
 
                     </div>

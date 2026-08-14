@@ -1,100 +1,366 @@
-.logo {
-    font-weight: 800;
-    color: #fff;
+ /* ===========================
+            FOOTER
+    =========================== */
+
+.gym-footer{
+    color:#cfcfcf;
+    padding-top:80px;
+    font-size:15px;
+    line-height:1.8;
 }
 
-/* Headings */
-.footer-heading {
-    color: #fff;
-    margin-bottom: 20px;
-    font-weight: 700;
+.gym-footer p{
+    color:#bdbdbd;
+    margin-bottom:0;
 }
 
-.footer-title {
-    color: var(--teal_hover);
-    margin-top: 20px;
+/* ===========================
+        LOGO
+=========================== */
+
+.logo{
+    color:#fff;
+    font-size:32px;
+    font-weight:800;
+    letter-spacing:1px;
+    margin-bottom:20px;
 }
 
-.small-text {
-    font-size: 14px;
+.logo i{
+    color:var(--teal_hover);
+    margin-right:8px;
+    font-size:34px;
 }
 
-/* Links */
-.footer-links {
-    list-style: none;
-    padding: 0;
+/* ===========================
+        HEADINGS
+=========================== */
+
+.footer-heading{
+    position:relative;
+    color:#fff;
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:28px;
+    padding-bottom:12px;
 }
 
-.footer-links li {
-    margin-bottom: 10px;
+.footer-heading i{
+    color:var(--teal_hover);
+    margin-right:8px;
 }
 
-.footer-links a {
-    color: #ccc;
-    text-decoration: none;
-    transition: 0.3s;
+.footer-heading::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:45px;
+    height:3px;
+    background:var(--teal_hover);
+    border-radius:5px;
 }
 
-.footer-links a:hover {
-    color: var(--teal_hover);
+/* ===========================
+        ABOUT
+=========================== */
+
+.footer-about p{
+    margin-bottom:18px;
 }
 
-/* Contact */
-.contact-item {
-    margin-bottom: 15px;
+.footer-title{
+    color:var(--teal_hover);
+    font-weight:700;
+    margin-bottom:12px;
 }
 
-.contact-item strong {
-    color: var(--teal_hover);
-    display: block;
+.footer-title i{
+    margin-right:8px;
 }
 
-/* Newsletter */
-.newsletter-form {
-    display: flex;
-    margin-top: 15px;
+.small-text{
+    color:#d0d0d0;
 }
 
-.newsletter-form input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #444;
-    background: transparent;
-    color: #fff;
-    outline: none;
+/* ===========================
+        LINKS
+=========================== */
+
+.footer-links{
+    list-style:none;
+    padding:0;
+    margin:0;
 }
 
-.newsletter-form button {
-    background: var(--teal_hover);
-    border: none;
-    padding: 0 18px;
-    color: #000;
-    cursor: pointer;
+.footer-links li{
+    margin-bottom:14px;
 }
 
-/* Social */
-.social-icons a {
-    display: inline-block;
-    width: 35px;
-    height: 35px;
-    background: #222;
-    text-align: center;
-    line-height: 35px;
-    border-radius: 50%;
-    margin-right: 8px;
-    color: #fff;
-    transition: 0.3s;
+.footer-links a{
+    color:#cfcfcf;
+    text-decoration:none;
+    transition:.35s;
+    display:inline-flex;
+    align-items:center;
 }
 
-.social-icons a:hover {
-    background: var(--teal_hover);
-    color: #000;
+.footer-links a i{
+    color:var(--teal_hover);
+    margin-right:6px;
+    transition:.35s;
 }
 
-/* Bottom */
-.footer-bottom {
-    border-top: 1px solid #222;
-    margin-top: 60px;
-    padding: 20px 0;
-    font-size: 14px;
+.footer-links a:hover{
+    color:var(--teal_hover);
+    padding-left:6px;
+}
+
+.footer-links a:hover i{
+    transform:translateX(5px);
+}
+
+/* ===========================
+        CONTACT
+=========================== */
+
+.contact-item{
+    margin-bottom:22px;
+}
+
+.contact-item strong{
+    display:flex;
+    align-items:center;
+    color:var(--teal_hover);
+    margin-bottom:8px;
+    font-size:16px;
+}
+
+.contact-item strong i{
+    margin-right:8px;
+    font-size:18px;
+}
+
+.contact-item p{
+    margin-left:26px;
+}
+
+/* ===========================
+        NEWSLETTER
+=========================== */
+
+.newsletter-form{
+    display:flex;
+    margin-top:20px;
+    overflow:hidden;
+    border-radius:8px;
+}
+
+.newsletter-form input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:#1d1d1d;
+    color:#fff;
+    padding:14px 18px;
+    font-size:15px;
+}
+
+.newsletter-form input::placeholder{
+    color:#8d8d8d;
+}
+
+.newsletter-form button{
+    width:60px;
+    border:none;
+    background:var(--teal_hover);
+    color:#000;
+    font-size:20px;
+    cursor:pointer;
+    transition:.35s;
+}
+
+.newsletter-form button:hover{
+    background:#fff;
+}
+
+/* ===========================
+        SOCIAL
+=========================== */
+
+.social-icons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.social-icons a{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#1f1f1f;
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    transition:.35s;
+}
+
+.social-icons a:hover{
+    background:var(--teal_hover);
+    color:#000;
+    transform:translateY(-6px);
+}
+
+/* ===========================
+        FOOTER BOTTOM
+=========================== */
+
+.footer-bottom{
+    margin-top:70px;
+    padding:25px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer-bottom p{
+    color:#bdbdbd;
+    font-size:14px;
+}
+
+.footer-bottom strong{
+    color:#fff;
+}
+
+.footer-bottom i{
+    color:#ff4d4d;
+}
+
+/* ===========================
+        HOVER EFFECT
+=========================== */
+
+.footer-about,
+.contact-item,
+.footer-links li{
+    transition:.35s;
+}
+
+.footer-about:hover{
+    transform:translateY(-4px);
+}
+
+.contact-item:hover{
+    transform:translateX(5px);
+}
+
+/* ===========================
+        RESPONSIVE
+=========================== */
+
+@media (max-width:991px){
+
+    .gym-footer{
+        text-align:center;
+        padding-top:60px;
+    }
+
+    .footer-heading::after{
+        left:50%;
+        transform:translateX(-50%);
+    }
+
+    .contact-item strong{
+        justify-content:center;
+    }
+
+    .contact-item p{
+        margin-left:0;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+
+    .newsletter-form{
+        max-width:420px;
+        margin:25px auto 0;
+    }
+
+}
+
+@media (max-width:767px){
+
+    .logo{
+        font-size:28px;
+    }
+
+    .footer-heading{
+        margin-top:10px;
+    }
+
+    .footer-bottom{
+        text-align:center;
+    }
+
+    .footer-bottom .text-md-start,
+    .footer-bottom .text-md-end{
+        text-align:center !important;
+    }
+
+}
+
+@media (max-width:576px){
+
+    .gym-footer{
+        padding-top:50px;
+    }
+
+    .logo{
+        font-size:26px;
+    }
+
+    .footer-heading{
+        font-size:18px;
+    }
+
+    .newsletter-form{
+        flex-direction:column;
+        gap:10px;
+        border-radius:0;
+    }
+
+    .newsletter-form input{
+        width:100%;
+        border-radius:8px;
+    }
+
+    .newsletter-form button{
+        width:100%;
+        height:50px;
+        border-radius:8px;
+    }
+
+    .social-icons{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .social-icons a{
+        width:42px;
+        height:42px;
+        font-size:18px;
+    }
+
+}
+
+/* ===========================
+    SMOOTH TRANSITION
+=========================== */
+
+.gym-footer *,
+.gym-footer *::before,
+.gym-footer *::after{
+    transition:all .3s ease;
 }

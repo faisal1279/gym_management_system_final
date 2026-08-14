@@ -149,10 +149,6 @@ public class TrainerService {
 
         trainerRepository.save(trainer);
     }
-    // Get all trainers
-//    public Page<Trainer> getAllTrainers(Pageable pageable) {
-//        return trainerRepository.findAll(pageable);
-//    }
     public Page<Trainer> searchTrainers(String keyword, Boolean active, Pageable pageable) {
 
         if (keyword == null) {
@@ -186,6 +182,7 @@ public class TrainerService {
 
     // Get all active trainers
     public List<Trainer> getActiveTrainers() {
+
         return trainerRepository.findAllByActiveTrue();
     }
 
@@ -238,10 +235,6 @@ public class TrainerService {
         if(total == 0) return 0;
         return ((double) present / total) * 100;
     }
-    //get member
-//    public List<MemberProgress> getMemberProgress(UUID memberId) {
-//        return progressRepository.findByMember_MemberIdOrderByRecordDateDesc(memberId);
-//    }
     // Get member progress with trainer validation
     public List<MemberProgress> getMemberProgress(UUID memberId, Principal principal) {
         Trainer trainer = getLoggedInTrainer(principal);

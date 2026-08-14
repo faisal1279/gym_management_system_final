@@ -20,18 +20,7 @@ import java.util.UUID;
 public class BlogController {
 
     private final BlogService blogService;
-    // Public Blog List
-//    @GetMapping("/blogs")
-//    public String blogs(Model model, @RequestParam(defaultValue = "0") int page) {
-//
-//        Pageable pageable = PageRequest.of(page,7);
-//        Page<Blog> blogList = blogService.getAllPublishedBlogs(pageable);
-//        model.addAttribute("blogs", blogList.getContent());
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", blogList.getTotalPages());
-//
-//        return "website/blog/blogs";
-//    }
+
     @GetMapping("/blogs")
     public String blogs(
             @RequestParam(defaultValue = "") String keyword,
@@ -43,7 +32,7 @@ public class BlogController {
 
         Page<Blog> blogs = blogService.searchBlogs(keyword, category, pageable);
 
-        // 🔥 dynamic categories
+        //  dynamic categories
         List<String> categories = blogService.getAllCategories();
 
         model.addAttribute("blogs", blogs.getContent());

@@ -90,7 +90,7 @@ public class ExerciseService {
             String fileName =
                     UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-            Path path = Paths.get(uploadDir + fileName);
+            Path path = Paths.get(uploadDir , fileName);
 
             Files.write(path, file.getBytes());
 

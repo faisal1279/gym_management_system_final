@@ -2,6 +2,7 @@ package com.brightnest.gymmanagementsystem.controller;
 
 import com.brightnest.gymmanagementsystem.service.GalleryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,8 @@ public class AdminGalleryController {
     public String createImagePage(Model model) {
         return "admin/gallery/create-image";
     }
+
+//    @PreAuthorize("@permissionService.hasPermission(authentication,'GALLERY_CREATE')")
     @PostMapping("/admin/gallery/image/create")
     public String createImage(@RequestParam List<MultipartFile> files, @RequestParam String title, @RequestParam String description, @RequestParam String category, RedirectAttributes redirectAttributes, Model model) {
         try{
