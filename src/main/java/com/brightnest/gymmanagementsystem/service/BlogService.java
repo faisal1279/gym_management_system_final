@@ -130,13 +130,23 @@ public class BlogService {
                                 MultipartFile file) throws Exception {
         if (file == null || file.isEmpty()) return;
 
-        String uploadDir = "uploads/blog/";
-        Files.createDirectories(Paths.get(uploadDir));
+//        String uploadDir = "uploads/blog/";
+//        Files.createDirectories(Paths.get(uploadDir));
+//
+//        String fileName =
+//                UUID.randomUUID() + "_" + file.getOriginalFilename();
+//
+//        Path path = Paths.get(uploadDir , fileName);
+//
+//        Files.write(path, file.getBytes());
+
+        Path uploadDir = Paths.get("uploads", "blog");
+        Files.createDirectories(uploadDir);
 
         String fileName =
                 UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-        Path path = Paths.get(uploadDir , fileName);
+        Path path = uploadDir.resolve(fileName);
 
         Files.write(path, file.getBytes());
 
@@ -147,15 +157,16 @@ public class BlogService {
     private void saveImage(Blog blog,List<MultipartFile> images) throws Exception {
         if(images==null || images.isEmpty()) return;
 
-        String uploadDir = "uploads/blog/";
-        Files.createDirectories(Paths.get(uploadDir));
+        Path uploadDir = Paths.get("uploads", "blog");
+        Files.createDirectories(uploadDir);
+
 
         for (MultipartFile file : images) {
             if(file.isEmpty()) continue;
 
             String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
 
-            Path path = Paths.get(uploadDir , fileName);
+            Path path = uploadDir.resolve(fileName);
 
             Files.write(path, file.getBytes());
 
